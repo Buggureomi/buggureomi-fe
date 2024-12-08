@@ -35,7 +35,8 @@ export default function MemberJoin() {
 
       setLoginResponse(data);
       if (data.status === "OK") {
-        console.log("Go To Main Page");
+        history.push("/main");
+        localStorage.setItem("userId", String(data.data.id));
       }
     });
   }
