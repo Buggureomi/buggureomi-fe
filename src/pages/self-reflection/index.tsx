@@ -144,7 +144,7 @@ export default function SelfReflection() {
       </CardContent>
       <ConfirmDialog
         open={showConfirmModal}
-        onOpenChange={setShowConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
         onConfirm={confirmSubmission}
       />
     </Card>

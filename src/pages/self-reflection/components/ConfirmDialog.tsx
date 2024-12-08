@@ -10,17 +10,17 @@ import {
 
 interface ConfirmDialogProps {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onClose: () => void;
   onConfirm: () => void;
 }
 
 export function ConfirmDialog({
   open,
-  onOpenChange,
+  onClose,
   onConfirm,
 }: ConfirmDialogProps) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>제출 확인</DialogTitle>
@@ -29,7 +29,7 @@ export function ConfirmDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex flex-col gap-2 sm:flex-row sm:gap-0 sm:justify-end">
-          <Button onClick={() => onOpenChange(false)} variant="outline">
+          <Button onClick={onClose} variant="outline">
             취소
           </Button>
           <Button onClick={onConfirm} className="bg-primary text-white">
