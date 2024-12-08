@@ -17,7 +17,7 @@ export default function AnswerCreate() {
   const [senderName, setSenderName] = useState<string>("");
 
   return (
-    <section className="h-screen flex justify-evenly flex-col items-center gap-4">
+    <section className="h-screen flex justify-evenly flex-col items-center">
       <div className="flex flex-col items-center gap-4">
         <h1 className="font-bold text-2xl">
           {MOCK_MEMBER.nickname}님이 쪽지를 기다려요!
