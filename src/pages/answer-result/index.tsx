@@ -23,8 +23,8 @@ export default function AnswerResult() {
     <>
       <div>
         <div className="text-center pt-20 pb-10 mb-3">
-          <h2 className="font-bold text-h2 text-primary">사용자님의 보따리</h2>
-          <h5 className="font-bold text-h5">
+          <h2 className="text-h2 text-primary">사용자님의 보따리</h2>
+          <h5 className="text-h5">
             {dummyData.answerData.length}개의 답변이 담겨 있어요!
           </h5>
         </div>
