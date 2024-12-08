@@ -31,21 +31,13 @@ export default function Main() {
   const answerCount = answers.length;
   const previewMessage = answers[getRandomIndex(answers)];
 
-  const onClickShareButton = () => {
-    alert("링크가 복사되었습니다");
-  };
-
   return (
     <section className="flex flex-col justify-center items-center h-screen">
       <h2 className="font-bold text-2xl mb-2">{member.nickname}님의 보따리</h2>
       {answerCount < 1 ? (
-        <WithoutAnswer onClickShareButton={onClickShareButton} />
+        <WithoutAnswer />
       ) : (
-        <WithAnswer
-          answerCount={answerCount}
-          previewMessage={previewMessage}
-          onClickShareButton={onClickShareButton}
-        />
+        <WithAnswer answerCount={answerCount} previewMessage={previewMessage} />
       )}
     </section>
   );

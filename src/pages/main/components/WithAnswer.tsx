@@ -1,3 +1,4 @@
+import ShareButton from "@/components/share/ShareButton";
 import { Button } from "@/components/ui/button";
 import { BUNDEL_IMAGE_URL } from "@/constant/image";
 import { Answer } from "@/types/answer";
@@ -6,14 +7,9 @@ import { SelfReflection } from "@/types/self-reflection";
 type Props = {
   answerCount: number;
   previewMessage: Answer;
-  onClickShareButton: () => void;
 };
 
-export default function WithAnswer({
-  answerCount,
-  previewMessage,
-  onClickShareButton,
-}: Props) {
+export default function WithAnswer({ answerCount, previewMessage }: Props) {
   const selfReflection: SelfReflection = {
     type: 0,
     list: [],
@@ -33,9 +29,7 @@ export default function WithAnswer({
       <span className="font-bold mb-4 ">
         누구의 쪽지일까요? 지금 열어보세요!
       </span>
-      <Button onClick={onClickShareButton} className="mb-2">
-        공유하기
-      </Button>
+      <ShareButton className="mb-2" />
       {selfReflection.type === 0 ? (
         <Button>나 돌아보기</Button>
       ) : (

@@ -1,11 +1,8 @@
+import ShareButton from "@/components/share/ShareButton";
 import { Button } from "@/components/ui/button";
 import { BUNDEL_IMAGE_URL } from "@/constant/image";
 
-type Props = {
-  onClickShareButton: () => void;
-};
-
-export default function WithoutAnswer({ onClickShareButton }: Props) {
+export default function WithoutAnswer() {
   return (
     <div className="flex flex-col items-center">
       <span>어떤 쪽지들이 담길까요?</span>
@@ -15,9 +12,7 @@ export default function WithoutAnswer({ onClickShareButton }: Props) {
       <span className="font-bold mb-2">
         쪽지를 넣어줄 친구에게 공유해보아요!
       </span>
-      <Button onClick={onClickShareButton} className="mb-2">
-        공유하기
-      </Button>
+      <ShareButton className="mb-2" />
       <Button>먼저 올 한해의 나를 돌아볼까요?</Button>
     </div>
   );
