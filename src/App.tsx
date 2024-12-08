@@ -1,14 +1,7 @@
-import Main from "./pages/main";
-// import QuestionCreate from "./pages/question-create";
+import Routing from "./pages/index";
 
 function App() {
-  return (
-    <>
-      {/* TODO: 추후 Route 작업 필요 */}
-      {/* <QuestionCreate /> */}
-      <Main />
-    </>
-  );
+  return <Routing />;
 }
 
 export default App;
