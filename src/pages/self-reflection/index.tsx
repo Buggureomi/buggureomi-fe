@@ -10,32 +10,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  regret: z.string().min(1, { message: "이 필드는 필수입니다" }),
-  bestThing: z.string().min(1, { message: "이 필드는 필수입니다" }),
-  nextYearGoal: z.string().min(1, { message: "이 필드는 필수입니다" }),
-  message2024: z.string().min(1, { message: "이 필드는 필수입니다" }),
-  message2025: z.string().min(1, { message: "이 필드는 필수입니다" }),
-});
+import { ConfirmDialog } from "@/pages/self-reflection/components/ConfirmDialog";
+import { selfReflectionSchema } from "@/pages/self-reflection/schemas/reflectionSchema";
 
 export default function SelfReflection() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof selfReflectionSchema>>({
+    resolver: zodResolver(selfReflectionSchema),
     defaultValues: {
       regret: "",
       bestThing: "",
@@ -156,30 +142,11 @@ export default function SelfReflection() {
           </form>
         </Form>
       </CardContent>
-      <Dialog open={showConfirmModal} onOpenChange={setShowConfirmModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>제출 확인</DialogTitle>
-            <DialogDescription>
-              정말로 제출하시겠습니까? 제출 후에는 수정이 불가능합니다.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex flex-col gap-2 sm:flex-row sm:gap-0 sm:justify-end">
-            <Button
-              onClick={() => setShowConfirmModal(false)}
-              variant="outline"
-            >
-              취소
-            </Button>
-            <Button
-              onClick={confirmSubmission}
-              className="bg-primary text-white"
-            >
-              확인
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmDialog
+        open={showConfirmModal}
+        onOpenChange={setShowConfirmModal}
+        onConfirm={confirmSubmission}
+      />
     </Card>
   );
 }
