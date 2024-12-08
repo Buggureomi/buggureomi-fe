@@ -1,7 +1,7 @@
 import ShareButton from "@/components/share/ShareButton";
 import { Button } from "@/components/ui/button";
 
-export default function QuestionCreated() {
+export default function QuestionCreateComplete() {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="text-center">
