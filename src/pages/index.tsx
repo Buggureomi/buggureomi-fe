@@ -4,6 +4,7 @@ import Main from "./main";
 import { MockRouteList } from "./_mock";
 import QuestionCreateComplete from "./question-create-complete";
 import QuestionCreate from "./question-create";
+import AnswerCreate from "./answer-create";
 
 export default function Routing() {
   return (
@@ -28,6 +29,7 @@ export default function Routing() {
             path="/question-create-complete"
             render={() => <QuestionCreateComplete />}
           />
+          <Route exact path="/answer-create" render={() => <AnswerCreate />} />
           <Redirect to="/" />
         </Switch>
       </BrowserRouter>

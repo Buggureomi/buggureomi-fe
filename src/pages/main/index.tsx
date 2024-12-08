@@ -1,17 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { getRandomIndex } from "@/lib/utils";
 import { Answer } from "@/types/answer";
-import { Member } from "@/types/member";
 
 export default function Main() {
-  const member: Member | undefined = {
-    nickname: "park",
-  }; // by getMemberSession();
-
-  if (!member) {
-    // todo: redirect("/login");
-  }
-
   const answers: Answer[] = [
     {
       sender: "someone",

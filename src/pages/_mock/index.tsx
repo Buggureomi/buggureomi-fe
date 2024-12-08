@@ -34,6 +34,12 @@ export function MockRouteList() {
       path: "/main",
       component: "Main",
     },
+    // 답변 생성
+    {
+      task: "MCRT-1",
+      path: "/answer-create",
+      component: "AnswerCreate",
+    },
   ];
 
   return (
