@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import RandomInput from "./components/RandomInput";
 import { useState } from "react";
-import { BUNDEL_IMAGE_URL } from "@/constant/constant";
+import { BUNDEL_IMAGE_URL } from "@/constant/image";
 
 export default function QuestionCreate() {
   const [question, setQuestion] = useState<string>("");

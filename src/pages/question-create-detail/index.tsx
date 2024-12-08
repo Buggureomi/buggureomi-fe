@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { toggleIsShowAnswerCountOption } from "./api/pouch";
-import { BUNDEL_IMAGE_URL } from "@/constant/constant";
+import { BUNDEL_IMAGE_URL } from "@/constant/image";
 
 export default function QuestionCreateDetail() {
   const [isShowAnswerCount, setIsShowAnswerCount] = useState<boolean>(false);
