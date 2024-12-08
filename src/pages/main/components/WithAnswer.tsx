@@ -30,7 +30,7 @@ export default function WithAnswer({ answerCount, previewMessage }: Props) {
         누구의 쪽지일까요? 지금 열어보세요!
       </span>
       <ShareButton className="mb-2" />
-      {selfReflection.type === 0 ? (
+      {selfReflection.list.length === 0 ? (
         <Button>나 돌아보기</Button>
       ) : (
         <Button>내가 생각한 나</Button>
