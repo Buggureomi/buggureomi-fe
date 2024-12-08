@@ -1,11 +1,8 @@
-import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 import { member } from "@/api/member";
-import { MemberJoinParam } from "@/api/member/type";
-import { memberJoin, MemberJoinFormType } from "./schema/memberJoinSchema";
+import { MemberLoginParam, MemberLoginResponse } from "@/api/member/type";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,44 +12,43 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export default function MemberJoin() {
+  const [loginResponse, setLoginResponse] = useState<MemberLoginResponse>();
+
   const history = useHistory();
 
-  const form = useForm<MemberJoinFormType>({
-    resolver: zodResolver(memberJoin),
+  const form = useForm<MemberLoginParam>({
     defaultValues: {
       nickname: "",
-      email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof memberJoin>) {
-    const joinParams: MemberJoinParam = {
-      ...values,
-      email: values.email as `${string}@${string}`,
-    };
-    member.join(joinParams).then((res) => {
+  function onSubmit(values: MemberLoginParam) {
+    member.login(values).then((res) => {
       const data = res.data;
 
+      setLoginResponse(data);
       if (data.status === "OK") {
-        history.push("/member-login");
+        console.log("Go To Main Page");
       }
     });
+  }
+
+  function goToJoinPage() {
+    history.push("/member-join");
   }
 
   return (
     <>
       <div className="text-center pt-20 pb-10 mb-3">
-        <h3 className="text-h3">
-          내 스스로 난 <span className="text-primary">어떤 사람</span>이었는지
-        </h3>
-        <h3 className="text-h3">정의할 수 있는 닉네임을 만들어 보아요!</h3>
+        <h2 className="text-h2 text-primary">로그인</h2>
       </div>
-
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -73,23 +69,6 @@ export default function MemberJoin() {
           />
           <FormField
             control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>이메일</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="이메일을 입력하세요"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
@@ -101,13 +80,25 @@ export default function MemberJoin() {
                     {...field}
                   />
                 </FormControl>
+                {loginResponse?.status === "BAD_REQUEST" && (
+                  <FormDescription>{loginResponse.message}</FormDescription>
+                )}
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">회원가입</Button>
+          <Button type="submit">로그인</Button>
         </form>
       </Form>
+
+      <Button
+        onClick={goToJoinPage}
+        type="submit"
+        variant="link"
+        className="mx-auto block mt-4"
+      >
+        일반 회원가입
+      </Button>
     </>
   );
 }

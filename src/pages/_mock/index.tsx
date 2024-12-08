@@ -18,6 +18,11 @@ export function MockRouteList() {
       path: "/member-join",
       component: "MemberJoin",
     },
+    {
+      task: "SIGN-2",
+      path: "/member-login",
+      component: "MemberLogin",
+    },
     // 질문 생성
     {
       task: "QCRT-1",

@@ -5,7 +5,7 @@ export type MemberJoinParam = {
 };
 
 export type MemberJoinResponse = {
-  status: string;
+  status: "OK" | "BAD_REQUEST";
   message: string;
 };
 
@@ -15,7 +15,7 @@ export type MemberLoginParam = {
 };
 
 export type MemberLoginResponse = {
-  status: string;
+  status: "OK" | "BAD_REQUEST";
   message: string;
   data: {
     id: number;
