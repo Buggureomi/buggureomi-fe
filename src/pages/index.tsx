@@ -1,12 +1,18 @@
 import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
-import QuestionCreateDetail from "./question-create-detail";
-import Main from "./main";
+
 import { MockRouteList } from "./_mock";
-import QuestionCreateComplete from "./question-create-complete";
+
+import Main from "./main";
+
+import MemberJoin from "./member-join";
+
 import QuestionCreate from "./question-create";
+import QuestionCreateDetail from "./question-create-detail";
+import QuestionCreateComplete from "./question-create-complete";
+
 import AnswerCreate from "./answer-create";
-import SelfReflection from "@/pages/self-reflection";
 import AnswerResult from "./answer-result";
+import SelfReflection from "./self-reflection";
 
 export default function Routing() {
   return (
@@ -16,6 +22,7 @@ export default function Routing() {
           {/* Route 확인용 (작업 시 꼭 추가 부탁드립니다!!) */}
           <Route exact path="/" render={() => <MockRouteList />} />
           <Route exact path="/main" render={() => <Main />} />
+          <Route exact path="/member-join" render={() => <MemberJoin />} />
           <Route
             exact
             path="/question-create"
