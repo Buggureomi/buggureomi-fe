@@ -38,12 +38,11 @@ export default function AnswerCreate() {
                 backgroundColor: colorCode ?? "white",
                 color: colorCode ? "white" : "black",
               }}
-              children={
-                <p>
-                  <b>{MOCK_MEMBER.nickname}</b>와 어울리는 색상은?
-                </p>
-              }
-            />
+            >
+              <p>
+                <b>{MOCK_MEMBER.nickname}</b>와 어울리는 색상은?
+              </p>
+            </Button>
           </PopoverTrigger>
           <PopoverContent>
             <ColorPicker
