@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BUNDEL_IMAGE_URL } from "@/constant/image";
 import { Answer } from "@/types/answer";
+import { SelfReflection } from "@/types/self-reflection";
 
 type Props = {
   answerCount: number;
@@ -13,6 +14,12 @@ export default function WithAnswer({
   previewMessage,
   onClickShareButton,
 }: Props) {
+  const selfReflection: SelfReflection = {
+    type: 0,
+    list: [],
+    regDate: "",
+  };
+
   return (
     <div className="flex flex-col items-center">
       <span>{answerCount}개의 답변이 담겨 있어요!</span>
@@ -26,7 +33,14 @@ export default function WithAnswer({
       <span className="font-bold mb-4 ">
         누구의 쪽지일까요? 지금 열어보세요!
       </span>
-      <Button onClick={onClickShareButton}>공유하기</Button>
+      <Button onClick={onClickShareButton} className="mb-2">
+        공유하기
+      </Button>
+      {selfReflection.type === 0 ? (
+        <Button>나 돌아보기</Button>
+      ) : (
+        <Button>내가 생각한 나</Button>
+      )}
     </div>
   );
 }
