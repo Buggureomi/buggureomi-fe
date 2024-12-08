@@ -164,7 +164,7 @@ export default function SelfReflection() {
               정말로 제출하시겠습니까? 제출 후에는 수정이 불가능합니다.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="flex flex-col gap-2 sm:flex-row sm:gap-0 sm:justify-end">
             <Button
               onClick={() => setShowConfirmModal(false)}
               variant="outline"
