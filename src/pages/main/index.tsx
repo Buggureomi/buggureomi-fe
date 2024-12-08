@@ -1,38 +1,41 @@
 import { Button } from "@/components/ui/button";
-
-interface Member {
-  nickname: string;
-  answerCount: number;
-  previewMessage: string;
-}
-
-interface Marble {
-  colorCode: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface previewMarbles {
-  counts: number;
-  list: Marble[];
-}
+import { getRandomIndex } from "@/lib/utils";
+import { Answer } from "@/types/answer";
+import { Member } from "@/types/member";
 
 export default function Main() {
   const member: Member | undefined = {
     nickname: "park",
-    answerCount: 1,
-    previewMessage: "수고많으셨어요...",
   }; // by getMemberSession();
 
   if (!member) {
     // todo: redirect("/login");
   }
 
+  const answers: Answer[] = [
+    {
+      sender: "someone",
+      content: "힘내세요",
+      colorCode: "#ffffff",
+      regDate: "",
+    },
+    {
+      sender: "anyone",
+      content: "밥 먹으세요",
+      colorCode: "#000000",
+      regDate: "",
+    },
+  ];
+
+  const answerCount = answers.length;
+  const previewMessage = answers[getRandomIndex(answers)];
+
   return (
     <>
-      {member.answerCount < 1 ? (
+      {answerCount < 1 ? (
         <Button>나를 돌아보기</Button>
       ) : (
-        <p>{member.previewMessage}</p>
+        <p>{previewMessage.content}</p>
       )}
     </>
   );
