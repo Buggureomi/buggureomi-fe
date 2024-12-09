@@ -6,7 +6,7 @@ import { Answer } from "@/types/answer";
 import WithoutAnswer from "./components/WithoutAnswer";
 import WithAnswer from "./components/WithAnswer";
 import NonLoggedSection from "./components/NonLoggedSection";
-import { answer } from "../../api/answer";
+import { answerAPI } from "../../api/answer";
 
 export default function Main() {
   const [memberId, setMemberId] = useState<string>();
@@ -27,7 +27,7 @@ export default function Main() {
 
   useEffect(() => {
     if (memberId) {
-      answer.list(memberId).then((data) => {
+      answerAPI.list(memberId).then((data) => {
         setAnswers(data.data.data.list);
         setNickname(data.data.data.nickname);
       });

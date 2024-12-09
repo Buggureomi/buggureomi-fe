@@ -29,30 +29,16 @@ export type GetAnswerListParam = {
   memberId: number;
 };
 
-export type GetAnswerListResponse = {
-  status: "OK" | "NOT_FOUND";
-  message: string;
-  data: {
-    list: Answer[] | null;
-  };
-  nickname: string;
-  totalCount: number;
-};
+export type GetAnswerListResponse = BaseResponse<{
+  list: Answer[] | null;
+}>;
 
 export type GetAnswerDetailParam = {
   answerId: number;
 };
-export type GetAnswerDetailResponse = {
-  status: "OK" | "NOT_FOUND";
-  message: string;
-  data: Answer | null;
-};
+export type GetAnswerDetailResponse = BaseResponse<Answer | null>;
 
 export type DeleteAnswerParam = {
   answerId: number;
 };
-export type DeleteAnswerResponse = {
-  status: "OK" | "NOT_FOUND";
-  message: string;
-  data: null;
-};
+export type DeleteAnswerResponse = BaseResponse<null>;
