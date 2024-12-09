@@ -27,9 +27,12 @@ export default function Main() {
 
   useEffect(() => {
     if (memberId) {
-      answerAPI.list(memberId).then((data) => {
-        setAnswers(data.data.data.list);
-        setNickname(data.data.data.nickname);
+      answerAPI.list({ memberId: Number(memberId) }).then((res) => {
+        const data = res.data;
+        if (data.data.list?.length) {
+          setAnswers(data.data.list);
+        }
+        setNickname(data.data.nickname);
       });
     }
   }, [memberId]);

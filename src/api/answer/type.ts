@@ -17,12 +17,6 @@ export type AnswerCreateResponse = BaseResponse<{
   colorCode: string;
 }>;
 
-export type AnswerListResponse = BaseResponse<{
-  list: Answer[];
-  nickname: string;
-  totalCount: number;
-}>;
-
 export type SelfReflectionAnswerResponse = BaseResponse<SelfReflection>;
 
 export type GetAnswerListParam = {
@@ -31,6 +25,8 @@ export type GetAnswerListParam = {
 
 export type GetAnswerListResponse = BaseResponse<{
   list: Answer[] | null;
+  nickname: string;
+  totalCount: number;
 }>;
 
 export type GetAnswerDetailParam = {
