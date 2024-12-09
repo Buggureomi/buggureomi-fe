@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { member } from "@/api/member";
-import { MemberLoginParam, MemberLoginResponse } from "@/api/member/type";
+import { MemberLoginParam } from "@/api/member/type";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export default function MemberJoin() {
-  const [loginResponse, setLoginResponse] = useState<MemberLoginResponse>();
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const history = useHistory();
 
@@ -33,10 +33,12 @@ export default function MemberJoin() {
     member.login(values).then((res) => {
       const data = res.data;
 
-      setLoginResponse(data);
       if (data.status === "OK") {
         history.push("/main");
         localStorage.setItem("userId", String(data.data.id));
+        setErrorMessage("");
+      } else {
+        setErrorMessage(data.message);
       }
     });
   }
@@ -81,8 +83,8 @@ export default function MemberJoin() {
                     {...field}
                   />
                 </FormControl>
-                {loginResponse?.status === "BAD_REQUEST" && (
-                  <FormDescription>{loginResponse.message}</FormDescription>
+                {errorMessage && (
+                  <FormDescription>{errorMessage}</FormDescription>
                 )}
                 <FormMessage />
               </FormItem>

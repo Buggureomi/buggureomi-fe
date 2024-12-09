@@ -10,14 +10,13 @@ import NonLoggedSection from "./components/NonLoggedSection";
 import { MOCK_MEMBER } from "../_mock/data/member";
 
 export default function Main() {
-  const [hasUserId, setHasUserIdValue] = useState<boolean | null>(null);
+  const [hasUserId, setHasUserId] = useState<boolean>(false);
 
   useEffect(() => {
     const checkLocalStorage = () => {
       const userId = localStorage.getItem("userId");
-      console.log(userId);
 
-      setHasUserIdValue(userId !== null);
+      setHasUserId(userId !== null);
     };
 
     checkLocalStorage();
