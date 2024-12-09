@@ -97,7 +97,7 @@ export default function SelfReflection() {
       toast({
         variant: "destructive",
         title: "질문 로딩 실패",
-        description: "질문을 불러오는데 실패했습니다. 새로고침 해주세요.",
+        description: "질문을 불러오는데 실패했습니다. 다시 시도해주세요.",
       });
     }
   };
