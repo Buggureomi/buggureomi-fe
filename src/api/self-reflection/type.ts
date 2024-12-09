@@ -1,3 +1,5 @@
+import { BaseResponse } from "@/api/type";
+
 export type ReflectionQuestion = {
   id: number;
   content: string;
@@ -8,10 +10,7 @@ export type ReflectionRequest = {
   content: string;
 };
 
-export type QuestionResponse = {
-  message: string;
-  data: ReflectionQuestion[];
-};
+export type QuestionResponse = BaseResponse<ReflectionQuestion[]>;
 
 export interface SubmitReflectionResponse {
   status: "OK" | "BAD_REQUEST" | "NOT_FOUND";
@@ -35,11 +34,4 @@ export interface GetReflectionResponse {
   data: ReflectionAnswer[];
 }
 
-export interface GetReflectionAnswerResponse {
-  status: "OK" | "BAD_REQUEST" | "NOT_FOUND";
-  message: string;
-  data: {
-    commonQuestionsId: number;
-    content: string;
-  }[];
-}
+export type GetReflectionAnswerResponse = BaseResponse<ReflectionAnswer[]>;
