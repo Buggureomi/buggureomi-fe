@@ -24,7 +24,7 @@ export default function AnswerList({ listData, onDialogOpen }: Props) {
                 answer={marble}
                 onDialogOpen={() => onDialogOpen(marble)}
               />
-            ); // TODO: key값 업데이트 필요
+            );
           })}
       </div>
     </ScrollArea>
