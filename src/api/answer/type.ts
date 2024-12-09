@@ -24,3 +24,35 @@ export type AnswerListResponse = BaseResponse<{
 }>;
 
 export type SelfReflectionAnswerResponse = BaseResponse<SelfReflection>;
+
+export type GetAnswerListParam = {
+  memberId: number;
+};
+
+export type GetAnswerListResponse = {
+  status: "OK" | "NOT_FOUND";
+  message: string;
+  data: {
+    list: Answer[] | null;
+  };
+  nickname: string;
+  totalCount: number;
+};
+
+export type GetAnswerDetailParam = {
+  answerId: number;
+};
+export type GetAnswerDetailResponse = {
+  status: "OK" | "NOT_FOUND";
+  message: string;
+  data: Answer | null;
+};
+
+export type DeleteAnswerParam = {
+  answerId: number;
+};
+export type DeleteAnswerResponse = {
+  status: "OK" | "NOT_FOUND";
+  message: string;
+  data: null;
+};
