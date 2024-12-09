@@ -10,4 +10,17 @@ export const answer = {
 
     return res;
   },
+  list: async (
+    memberId: string
+  ): Promise<AxiosResponse<T.AnswerListResponse>> => {
+    const res = await api.get(`/answer/${memberId}/list`);
+
+    return res;
+  },
+  selfReflection: async (
+    memberId: string
+  ): Promise<AxiosResponse<T.SelfReflectionAnswerResponse>> => {
+    const res = await api.get(`/self-reflection/${memberId}/list`);
+    return res;
+  },
 };

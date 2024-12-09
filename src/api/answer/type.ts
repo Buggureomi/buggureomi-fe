@@ -1,4 +1,6 @@
 import { BaseResponse } from "../type";
+import { Answer } from "@/types/answer";
+import { SelfReflection } from "@/types/self-reflection";
 
 export type AnswerCreateParam = {
   memberId: number;
@@ -14,3 +16,11 @@ export type AnswerCreateResponse = BaseResponse<{
   questionContent: string;
   colorCode: string;
 }>;
+
+export type AnswerListResponse = BaseResponse<{
+  list: Answer[];
+  nickname: string;
+  totalCount: number;
+}>;
+
+export type SelfReflectionAnswerResponse = BaseResponse<SelfReflection>;
