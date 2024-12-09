@@ -1,8 +1,9 @@
 import ShareButton from "@/components/share/ShareButton";
 import { Button } from "@/components/ui/button";
+import { MEMBER_ID_KEY } from "@/constant/keys";
 
 export default function QuestionCreateComplete() {
-  const memberId = localStorage.getItem("userId");
+  const memberId = localStorage.getItem(MEMBER_ID_KEY);
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="text-center">
