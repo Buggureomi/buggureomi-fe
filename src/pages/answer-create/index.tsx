@@ -28,6 +28,7 @@ function useQuery() {
 export default function AnswerCreate() {
   const query = useQuery();
 
+  // TODO: questionId로 질문 정보 조회하는 api 연결 필요
   const questionId = query.get("questionId") as string;
 
   const [colorCode, setColorCode] = useState<string | undefined>(undefined);
@@ -38,6 +39,7 @@ export default function AnswerCreate() {
   const { userId } = useUserStore();
 
   if (!userId) {
+    // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
     return <DirectLogin />;
   }
 

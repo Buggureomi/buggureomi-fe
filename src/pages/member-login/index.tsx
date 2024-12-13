@@ -43,6 +43,7 @@ export default function MemberLogin() {
         setUser(data.data.id);
 
         if (state?.memberId && state?.questionId) {
+          // COMMENT: 답변 작성 페이지에서 로그인 페이지로 유도한 경우 로그인 성공시 다시 답변 페이지로 redirection
           history.push({
             pathname: "/answer",
             search: `?memberId=${state.memberId}&questionId=${state.questionId}`,
