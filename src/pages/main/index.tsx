@@ -1,30 +1,28 @@
 import { useState, useEffect } from "react";
 
+import { answerAPI } from "../../api/answer";
+
 import { getRandomIndex } from "@/lib/utils";
 import { Answer } from "@/types/answer";
 
 import WithoutAnswer from "./components/WithoutAnswer";
 import WithAnswer from "./components/WithAnswer";
 import NonLoggedSection from "./components/NonLoggedSection";
-import { answerAPI } from "../../api/answer";
-import { MEMBER_ID_KEY } from "@/constant/keys";
+
+import { useUserStore } from "@/store/userStore";
 
 export default function Main() {
   const [memberId, setMemberId] = useState<string>();
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [nickname, setNickname] = useState<string>("");
 
+  const { userId } = useUserStore();
+
   useEffect(() => {
-    const checkLocalStorage = () => {
-      const userId = localStorage.getItem(MEMBER_ID_KEY);
-
-      if (userId) {
-        setMemberId(userId);
-      }
-    };
-
-    checkLocalStorage();
-  }, []);
+    if (userId) {
+      setMemberId(String(userId));
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (memberId) {

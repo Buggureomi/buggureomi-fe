@@ -1,5 +1,7 @@
-import { answerAPI } from "@/api/answer";
 import { useEffect, useState } from "react";
+import { answerAPI } from "@/api/answer";
+
+import { useUserStore } from "@/store/userStore";
 
 const Snowfall = () => {
   const snowflakes = Array.from({ length: 50 });
@@ -17,9 +19,9 @@ const Snowfall = () => {
     });
   };
 
-  const userId = Number(localStorage.getItem("userId"));
+  const { userId } = useUserStore();
   useEffect(() => {
-    handleSnowflakeColor(userId);
+    if (userId) handleSnowflakeColor(userId);
   }, [userId]);
 
   return (

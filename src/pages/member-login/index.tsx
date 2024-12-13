@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { memberAPI } from "@/api/member";
 import { MemberLoginParam } from "@/api/member/type";
+
+import { useUserStore } from "@/store/userStore";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +18,12 @@ import {
   FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 
 export default function MemberLogin() {
   const { state } = useLocation<{ memberId: number; questionId: number }>();
   const [errorMessage, setErrorMessage] = useState<string>();
+
+  const { setUser } = useUserStore();
 
   console.log(state);
   const history = useHistory();
@@ -36,7 +40,7 @@ export default function MemberLogin() {
       const data = res.data;
 
       if (data.status === "OK") {
-        localStorage.setItem("userId", String(data.data.id));
+        setUser(data.data.id);
 
         if (state?.memberId && state?.questionId) {
           history.push({
