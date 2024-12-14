@@ -144,7 +144,7 @@ export default function SelfReflection() {
 
   return (
     <div className="w-full">
-      <h3 className="text-h3 text-gray-dark">나 돌아보기</h3>
+      <h3 className="text-h3 text-gray-900">나 돌아보기</h3>
       <p className="text-body text-destructive">
         {existingAnswers.length > 0 ? DESCRIPTION.READ : DESCRIPTION.WRITE}
       </p>
@@ -160,7 +160,7 @@ export default function SelfReflection() {
                 name={name as keyof z.infer<typeof selfReflectionSchema>}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-dark">{label}</FormLabel>
+                    <FormLabel className="text-gray-900">{label}</FormLabel>
                     <FormControl>
                       {type === "input" ? (
                         <Input placeholder={placeholder} {...field} />
@@ -174,7 +174,6 @@ export default function SelfReflection() {
               />
             ))}
             <Button
-              size="lg"
               type="submit"
               className="w-full"
               disabled={!form.formState.isValid || form.formState.isSubmitting}
