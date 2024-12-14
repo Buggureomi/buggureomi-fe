@@ -8,8 +8,8 @@ const Snowfall = () => {
 
   const [snowColorArray, setSnowColorArray] = useState<string[]>([]);
 
-  const handleSnowflakeColor = async (memberId: number) => {
-    await answerAPI.list({ memberId }).then((res) => {
+  const handleSnowflakeColor = async (userId: number) => {
+    await answerAPI.list({ userId }).then((res) => {
       const data = res.data.data;
 
       const colorArr = data.list?.map((answer) => answer.colorCode);

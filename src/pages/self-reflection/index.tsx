@@ -103,7 +103,7 @@ export default function SelfReflection() {
     ].filter((item) => item.questionId);
 
     try {
-      await selfReflection.submitReflections(String(userId), reflections);
+      await selfReflection.submitReflections(userId, reflections);
       toast({
         title: "제출 완료",
         description: "회고가 성공적으로 저장되었습니다.",
@@ -125,8 +125,8 @@ export default function SelfReflection() {
       if (!userId) return;
       try {
         const [questionsRes, answersRes] = await Promise.all([
-          selfReflection.getCommonQuestions(String(userId)),
-          selfReflection.getSelfReflection(String(userId)),
+          selfReflection.getCommonQuestions(),
+          selfReflection.getSelfReflection(userId),
         ]);
         setQuestions(questionsRes.data.data);
         setExistingAnswers(answersRes.data.data);

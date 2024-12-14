@@ -14,8 +14,8 @@ export default function AnswerResult() {
 
   const [answersData, setAnswersData] = useState<Answer[]>();
 
-  const getAnswersData = async (memberId: number) => {
-    await answerAPI.list({ memberId: memberId }).then((res) => {
+  const getAnswersData = async (userId: number) => {
+    await answerAPI.list({ userId }).then((res) => {
       const data = res.data;
 
       if (data.status === "OK" && data.data.list) {

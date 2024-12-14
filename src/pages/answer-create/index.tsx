@@ -44,12 +44,12 @@ export default function AnswerCreate() {
   }
 
   const sendAnswer = async () => {
-    await memberAPI.search(String(userId)).then((res) => {
+    await memberAPI.search(userId).then((res) => {
       const userInfo = res.data.data;
       setUserNicname(userInfo.nickname);
 
       answerAPI.create({
-        memberId: Number(userId),
+        memberId: userId,
         questionId: questionId,
         nickname: userNickname,
         sender: senderName,

@@ -12,7 +12,6 @@ import NonLoggedSection from "./components/NonLoggedSection";
 import { useUserStore } from "@/store/userStore";
 
 export default function Main() {
-  const [memberId, setMemberId] = useState<string>();
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [nickname, setNickname] = useState<string>("");
 
@@ -20,13 +19,7 @@ export default function Main() {
 
   useEffect(() => {
     if (userId) {
-      setMemberId(String(userId));
-    }
-  }, [userId]);
-
-  useEffect(() => {
-    if (memberId) {
-      answerAPI.list({ memberId: Number(memberId) }).then((res) => {
+      answerAPI.list({ userId }).then((res) => {
         const data = res.data;
         if (data.data.list?.length) {
           setAnswers(data.data.list);
@@ -34,11 +27,11 @@ export default function Main() {
         setNickname(data.data.nickname);
       });
     }
-  }, [memberId]);
+  }, [userId]);
 
   const answerCount = answers.length;
   const previewMessage = answers[getRandomIndex(answers)];
-  const hasUserId = memberId != null;
+  const hasUserId = userId != null;
 
   return (
     <>
@@ -48,10 +41,10 @@ export default function Main() {
         <section className="flex flex-col justify-center items-center h-screen">
           <h2 className="font-bold text-2xl mb-2">{nickname}님의 보따리</h2>
           {answerCount < 1 ? (
-            <WithoutAnswer memberId={memberId} />
+            <WithoutAnswer userId={userId} />
           ) : (
             <WithAnswer
-              memberId={memberId}
+              userId={userId}
               answerCount={answerCount}
               previewMessage={previewMessage}
             />
