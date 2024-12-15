@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import GoBackHeader from "@/components/go-back-header/GoBackHeader";
-import SettingsSheet from "@/components/settings-sheet/SettingsSheet";
+import SettingsSheet from "@/features/settings/SettingsSheet";
+import BackHeader from "@/components/back-header/BackHeader";
 
 export default function Header() {
   const history = useHistory();
@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <div className="flex items-center justify-between">
-      <GoBackHeader />
+      <BackHeader />
       {isMainPage && <SettingsSheet />}
     </div>
   );
