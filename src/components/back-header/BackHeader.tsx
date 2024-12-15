@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-export default function GoBackHeader({ children, className }: Props) {
+export default function BackHeader({ children, className }: Props) {
   const history = useHistory();
   const handleBack = () => {
     history.push("/main");
