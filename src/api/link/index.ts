@@ -3,11 +3,8 @@ import { api } from "..";
 
 export async function getLink(
   questionId: number,
-  userId: number,
-  params: T.ShareLinkParam
+  userId: number
 ): Promise<T.ShareLinkResponse> {
-  const res = await api.get(`/question/${questionId}/share-info/${userId}`, {
-    params,
-  });
+  const res = await api.get(`/question/${questionId}/share-info/${userId}`);
   return res.data;
 }
