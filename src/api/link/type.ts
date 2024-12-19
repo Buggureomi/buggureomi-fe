@@ -7,5 +7,6 @@ export type ShareLinkResponse = {
   message: string;
   data: {
     url: string;
+    qrCode: string;
   };
 };
