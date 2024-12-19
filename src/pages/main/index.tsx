@@ -65,13 +65,12 @@ export default function Main() {
             {nickname}님의 보따리에
           </h2>
           {answerCount < 1 ? (
-            <WithoutAnswer userId={userId} questionId={question.questionId} />
+            <WithoutAnswer userId={userId} />
           ) : (
             <WithAnswer
               userId={userId}
               answerCount={answerCount}
               previewMessage={previewMessage}
-              questionId={question.questionId}
             />
           )}
         </section>

@@ -8,14 +8,12 @@ type Props = {
   answerCount: number;
   previewMessage: Answer;
   userId: number;
-  questionId: number;
 };
 
 export default function WithAnswer({
   answerCount,
   previewMessage,
   userId,
-  questionId,
 }: Props) {
   return (
     <div className="flex flex-col items-center">
@@ -43,7 +41,6 @@ export default function WithAnswer({
           variant={"outline"}
           className="w-full ml-2"
           userId={userId}
-          questionId={questionId}
         >
           공유
         </ShareButton>

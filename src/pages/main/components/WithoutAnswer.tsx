@@ -4,10 +4,9 @@ import { ReflectionButton } from "@/pages/main/components/ReflectionButton";
 
 type Props = {
   userId: number;
-  questionId: number;
 };
 
-export default function WithoutAnswer({ userId, questionId }: Props) {
+export default function WithoutAnswer({ userId }: Props) {
   return (
     <div className="flex flex-col items-center">
       <span className="text-h2 text-white mb-6">아직은 답변이 없어요.</span>
@@ -22,11 +21,7 @@ export default function WithoutAnswer({ userId, questionId }: Props) {
         다시 한번 공유해볼까요?
       </span>
       <ReflectionButton userId={userId} />
-      <ShareButton
-        className="w-full mt-2"
-        userId={userId}
-        questionId={questionId}
-      >
+      <ShareButton className="w-full mt-2" userId={userId}>
         공유
       </ShareButton>
     </div>
