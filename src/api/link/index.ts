@@ -5,7 +5,7 @@ export async function getLink(
   userId: number,
   params: T.ShareLinkParam
 ): Promise<T.ShareLinkResponse> {
-  const res = await api.get(`/api/v1/member/share-info/${userId}`, {
+  const res = await api.get(`/member/share-info/${userId}`, {
     params,
   });
   return res.data;
