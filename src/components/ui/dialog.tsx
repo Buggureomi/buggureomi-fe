@@ -41,6 +41,7 @@ const DialogContent = React.forwardRef<
         "fixed inset-x-0 bottom-0 mx-auto",
         "bg-background",
         "p-10",
+        "flex flex-col",
         "rounded-[40px]",
         "data-[state=open]:animate-slide-up",
         "data-[state=closed]:animate-slide-down",
