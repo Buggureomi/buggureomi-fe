@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import { MemberResponse, MemberSettings } from "@/types/member";
 import { apiWithToken } from "..";
 
-export const userInfo = {
+export const userAPI = {
   getSettings: async (
     userId: number
   ): Promise<AxiosResponse<MemberResponse>> => {

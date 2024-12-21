@@ -11,7 +11,7 @@ export default function OAuth() {
   const location = useLocation();
   const code = new URLSearchParams(location.search).get("code");
 
-  const { setUserId, setUserInfo } = useUserStore();
+  const { setUserInfo } = useUserStore();
 
   if (code) {
     memberAPI.getToken({ code }).then((res) => {
@@ -27,7 +27,6 @@ export default function OAuth() {
         const data = res.data;
 
         if (data.status === "OK") {
-          setUserId(Number(data.data.id));
           setUserInfo(data.data);
         }
 
