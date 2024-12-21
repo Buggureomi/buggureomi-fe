@@ -8,10 +8,11 @@ type Props = {
 };
 
 export default function LogoutButton({ className }: Props) {
-  const { clearUser } = useUserStore();
+  const { clearUserId, clearUserInfo } = useUserStore();
 
   const logout = () => {
-    clearUser();
+    clearUserId();
+    clearUserInfo();
   };
 
   return (

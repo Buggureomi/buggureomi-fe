@@ -44,7 +44,7 @@ export default function AnswerCreate() {
   }
 
   const sendAnswer = async () => {
-    await memberAPI.search(userId).then((res) => {
+    await memberAPI.search().then((res) => {
       const userInfo = res.data.data;
       setUserNicname(userInfo.nickname);
 
