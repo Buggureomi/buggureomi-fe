@@ -107,7 +107,7 @@ export default function SettingsSheet() {
             />
           </div>
         </div>
-        <SheetFooter className="mt-auto  flex-col gap-8">
+        <SheetFooter className="mt-auto !flex-col gap-8">
           <LogoutButton className="mx-auto" />
 
           <Button
