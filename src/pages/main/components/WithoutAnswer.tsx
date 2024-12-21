@@ -1,5 +1,5 @@
+import BOTTARI_WITHOUT_ANSWER from "@/assets/image/main/bottari_without_answer.png";
 import ShareButton from "@/components/share/ShareButton";
-import { BUNDEL_IMAGE_URL } from "@/constant/image";
 import { ReflectionButton } from "@/pages/main/components/ReflectionButton";
 
 type Props = {
@@ -11,7 +11,7 @@ export default function WithoutAnswer({ userId }: Props) {
     <div className="flex flex-col items-center">
       <span className="text-h2 text-white mb-6">아직은 답변이 없어요.</span>
       <div className="w-40 mb-4">
-        <img src={BUNDEL_IMAGE_URL} className="w-full h-full" />
+        <img src={BOTTARI_WITHOUT_ANSWER} className="w-full h-full" />
       </div>
       <span className="font-nanum-dahaengce text-white">조금만 더 답변을</span>
       <span className="font-nanum-dahaengce text-white mb-10">

@@ -1,4 +1,4 @@
-import { BUNDEL_IMAGE_URL } from "@/constant/image";
+import BOTTARI_WITH_ANSWER_IMAGE from "@/assets/image/main/bottari_with_answer.png";
 import { ReflectionButton } from "@/pages/main/components/ReflectionButton";
 import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/share/ShareButton";
@@ -20,7 +20,7 @@ export default function WithAnswer({
         {answerCount}개의 답변이 담겨 있어요!
       </span>
       <div className="w-40 mb-6">
-        <img src={BUNDEL_IMAGE_URL} className="w-full h-full" />
+        <img src={BOTTARI_WITH_ANSWER_IMAGE} className="w-full h-full" />
       </div>
       <h3 className="font-bold mb-2 w-full text-left text-white">
         담긴 쪽지 미리보기
