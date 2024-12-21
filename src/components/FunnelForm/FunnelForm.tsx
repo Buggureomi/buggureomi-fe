@@ -10,7 +10,7 @@ type FunnelFormProps<T extends FieldValues> = {
   onNext: () => void;
   onSubmit: (data: T) => void;
   onPrev: () => void;
-  isReadOnly: boolean;
+  isReadOnly?: boolean;
   children: React.ReactNode;
 };
 
