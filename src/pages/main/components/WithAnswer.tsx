@@ -1,27 +1,32 @@
-import BOTTARI_WITH_ANSWER_IMAGE from "@/assets/image/main/bottari_with_answer.png";
+import BUNDLE_WITH_ANSWER_IMAGE from "@/assets/image/main/bundle_with_answer.png";
 import { ReflectionButton } from "@/pages/main/components/ReflectionButton";
 import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/share/ShareButton";
+import Bundle from "./Bundle";
 
 type Props = {
   answerCount: number;
   previewMessage: string;
   userId: number;
+  questionContent: string;
 };
 
 export default function WithAnswer({
   answerCount,
   previewMessage,
   userId,
+  questionContent,
 }: Props) {
   return (
     <div className="flex flex-col items-center">
       <span className="text-white text-h2 mb-6">
         {answerCount}개의 답변이 담겨 있어요!
       </span>
-      <div className="w-40 mb-6">
-        <img src={BOTTARI_WITH_ANSWER_IMAGE} className="w-full h-full" />
-      </div>
+      <Bundle
+        bundleImageSrc={BUNDLE_WITH_ANSWER_IMAGE}
+        className="w-40 mb-6"
+        questionContent={questionContent}
+      />
       <h3 className="font-bold mb-2 w-full text-left text-white">
         담긴 쪽지 미리보기
       </h3>

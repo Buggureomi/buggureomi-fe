@@ -40,12 +40,16 @@ export default function Main() {
             {mainPageInfo.nickname}님의 보따리에
           </h2>
           {mainPageInfo.totalCount < 1 ? (
-            <WithoutAnswer userId={userInfo.id} />
+            <WithoutAnswer
+              userId={userInfo.id}
+              questionContent={mainPageInfo.content}
+            />
           ) : (
             <WithAnswer
               userId={userInfo.id}
               answerCount={mainPageInfo.totalCount}
               previewMessage={mainPageInfo.answerContent || ""}
+              questionContent={mainPageInfo.content}
             />
           )}
         </section>
