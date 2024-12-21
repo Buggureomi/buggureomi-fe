@@ -1,12 +1,11 @@
 import { BUNDEL_IMAGE_URL } from "@/constant/image";
-import { Answer } from "@/types/answer";
 import { ReflectionButton } from "@/pages/main/components/ReflectionButton";
 import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/share/ShareButton";
 
 type Props = {
   answerCount: number;
-  previewMessage: Answer;
+  previewMessage: string;
   userId: number;
 };
 
@@ -27,7 +26,7 @@ export default function WithAnswer({
         담긴 쪽지 미리보기
       </h3>
       <p className="bg-[#F3F3F3] w-full px-4 py-3 rounded-md mb-10 h-24 overflow-y-auto font-nanum-dahaengce">
-        {previewMessage.content}
+        {previewMessage}
       </p>
       <span className="font-nanum-dahaengce mb-4 text-white text-xl">
         누구의 쪽지일까요? 지금 열어보세요!
