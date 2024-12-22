@@ -38,7 +38,7 @@ export default function Main() {
         <NonLoggedSection />
       ) : !mainPageInfo ? (
         <div className="text-white h-screen flex flex-col justify-center items-center">
-          <p className="mb-4 text-h5">질문이 없어요!</p>
+          <p className="mb-4 text-h5">질문을 아직 만들지 않았어요!</p>
           <Button onClick={() => history.replace("/question-create")}>
             질문 만들러가기
           </Button>
