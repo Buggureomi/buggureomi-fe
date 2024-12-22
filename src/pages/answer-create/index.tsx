@@ -50,8 +50,9 @@ export default function AnswerCreate() {
 
   const getQuestionInfo = async () => {
     if (!sqidsId) return;
+
     try {
-      const res = await questionAPI.getQuestion(parseInt(sqidsId, 10));
+      const res = await questionAPI.getQuestion(sqidsId);
       setQuestionId(res.data.data.questionId);
     } catch (error) {
       toast({

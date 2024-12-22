@@ -12,7 +12,7 @@ export const questionAPI = {
   },
 
   getQuestion: async (
-    sqidsId: number
+    sqidsId: string
   ): Promise<AxiosResponse<T.QuestionGetResponse>> => {
     const res = await apiWithToken.get(`/question/${sqidsId}`);
     return res;
