@@ -4,19 +4,20 @@ import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/share/ShareButton";
 import Bundle from "./Bundle";
 import { useHistory } from "react-router-dom";
+import { MainPageInfo } from "@/types/main-page";
 
 type Props = {
-  answerCount: number;
-  previewMessage: string;
   userId: number;
-  questionContent: string;
+  mainPageInfo: MainPageInfo;
 };
 
 export default function WithAnswer({
-  answerCount,
-  previewMessage,
   userId,
-  questionContent,
+  mainPageInfo: {
+    totalCount: answerCount,
+    answerContent: previewMessage,
+    content: questionContent,
+  },
 }: Props) {
   const history = useHistory();
   const handleClick = () => {
@@ -50,11 +51,7 @@ export default function WithAnswer({
 
       <div className="flex w-full">
         <ReflectionButton userId={userId} />
-        <ShareButton
-          variant={"outline"}
-          className="w-full ml-2"
-          userId={userId}
-        >
+        <ShareButton variant={"outline"} className="w-full ml-2">
           공유
         </ShareButton>
       </div>
