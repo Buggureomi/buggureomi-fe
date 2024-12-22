@@ -1,21 +1,67 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnswerDescButtonSheet } from "./answer-desc-botton-sheet/AnswerDescBottonSheet";
 import { AnswerStartButton } from "./answer-start-botton-sheet/AnswerStartBottonSheet";
 import { useUserStore } from "@/store/userStore";
-import { DirectLogin } from "@/components/display/DirectLogin";
+import { useHistory, useLocation } from "react-router-dom";
+import { questionAPI } from "@/api/question";
+import { useToast } from "@/hooks/use-toast";
+
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 export function Answer() {
+  const query = useQuery();
+  const { toast } = useToast();
+  const history = useHistory();
+
+  const sqidsId = query.get("question") as string;
+  const [isAuthRequired, setIsAuthRequired] = useState<boolean>(false);
+  const [questionId, setQuestionId] = useState<number | null>(null);
+
   const [selectedType, setSelectedType] = useState<"DESC" | "START" | null>(
     null
   );
 
   const { userInfo } = useUserStore();
 
-  if (!userInfo?.id) {
-    // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
-    return <DirectLogin />;
-  }
+  const getQuestionInfo = async () => {
+    if (!sqidsId) return;
+
+    try {
+      const res = await questionAPI.getQuestion(sqidsId);
+      setIsAuthRequired(res.data.data.is_Auth_Required === 1);
+      setQuestionId(res.data.data.questionId);
+    } catch (error) {
+      toast({
+        description: "질문 정보를 불러오는데 실패했습니다.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  useEffect(() => {
+    getQuestionInfo();
+  }, [sqidsId, history]);
+
+  useEffect(() => {
+    if (selectedType === "START") {
+      if (!isAuthRequired || (isAuthRequired && userInfo?.id)) {
+        // 로그인이 필요없거나, 필요하지만 이미 로그인된 경우
+        history.push({
+          pathname: "/answer-create",
+          state: { questionId },
+        });
+      }
+    }
+  }, [selectedType, isAuthRequired, userInfo, questionId, history]);
+
+  // if (!userInfo?.id) {
+  //   // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
+  //   return <DirectLogin />;
+  // }
 
   return (
     <>
@@ -67,14 +113,14 @@ export function Answer() {
           }}
         />
       )}
-      {selectedType === "START" && (
+      {selectedType === "START" && isAuthRequired && !userInfo?.id && (
         <AnswerStartButton
           onClose={() => setSelectedType(null)}
           onBack={() => {
             setSelectedType("DESC");
           }}
           onClick={() => {
-            // 로그인 화면
+            history.push("/member-login");
           }}
         />
       )}

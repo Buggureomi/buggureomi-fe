@@ -12,8 +12,6 @@ import { COLOR_CODE_LIST } from "@/constant/color";
 import { useUserStore } from "@/store/userStore";
 import { Bead } from "@/components/bead/Bead";
 import { IoChevronForward } from "react-icons/io5";
-import { questionAPI } from "@/api/question";
-import { useToast } from "@/hooks/use-toast";
 
 const colorGroups = [
   ["EF4C4D", "FF884D", "FFC44E", "89C94D", "0A8403"],
@@ -21,18 +19,15 @@ const colorGroups = [
   ["FFC088", "BD6C41", "FFFFFF", "8E8E8E", "000000"],
 ];
 
-function useQuery() {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
+interface QuestionId {
+  questionId: string;
 }
 
 export default function AnswerCreate() {
-  const query = useQuery();
-  const { toast } = useToast();
-  const [questionId, setQuestionId] = useState<number | null>(null);
-
+  const location = useLocation<QuestionId>();
+  const questionId = location.state?.questionId;
   // TODO: questionId로 질문 정보 조회하는 api 연결 필요
-  const sqidsId = query.get("question") as string;
+
   const [colorCode, setColorCode] = useState<string | undefined>(undefined);
   const [content, setContent] = useState<string>("");
   const [senderName, setSenderName] = useState<string>("");
@@ -47,24 +42,6 @@ export default function AnswerCreate() {
     []
   );
   const { userInfo } = useUserStore();
-
-  const getQuestionInfo = async () => {
-    if (!sqidsId) return;
-
-    try {
-      const res = await questionAPI.getQuestion(sqidsId);
-      setQuestionId(res.data.data.questionId);
-    } catch (error) {
-      toast({
-        description: "질문 정보를 불러오는데 실패했습니다.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  useEffect(() => {
-    getQuestionInfo();
-  }, [sqidsId, history]);
 
   if (!userInfo?.id) {
     // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
