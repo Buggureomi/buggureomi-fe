@@ -10,9 +10,9 @@ export function Answer() {
     null
   );
 
-  const { userId } = useUserStore();
+  const { userInfo } = useUserStore();
 
-  if (!userId) {
+  if (!userInfo?.id) {
     // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
     return <DirectLogin />;
   }
@@ -42,14 +42,14 @@ export function Answer() {
         </div>
       </div>
       <div className="p-[2.5rem]">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full">
           <Button
-            className="w-72 h-12"
+            className="w-full"
             onClick={() => setSelectedType("DESC")}
             children={"보따리와 구슬 알기"}
           />
           <Button
-            className="w-72 h-12 bg-white"
+            variant="secondary"
             onClick={() => setSelectedType("START")}
             children={
               <div className="w-full flex flex-row items-center justify-center gap-2">
