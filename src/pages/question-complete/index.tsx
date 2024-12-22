@@ -16,16 +16,16 @@ export default function QuestionComplete() {
 
       <img src={mascot_back} className="w-40 h-40" alt="bundle" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 w-full">
         <Button
-          className="w-72 h-12"
+          className="w-full"
           onClick={() => {
             history.push("/main");
           }}
           children={"완료"}
         />
         <Button
-          className="w-72 h-12 bg-white"
+          className="w-full bg-white"
           onClick={() => {
             history.push("/main");
           }}
@@ -36,7 +36,7 @@ export default function QuestionComplete() {
                 size={25}
                 style={{ width: "1.5rem", height: "1.5rem" }}
               />
-              <span className="text-[#667EF5]">링크 공유하기</span>
+              <span className="text-primary">링크 공유하기</span>
             </div>
           }
         />
