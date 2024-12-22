@@ -10,16 +10,20 @@ import WithAnswer from "./components/WithAnswer";
 import NonLoggedSection from "./components/NonLoggedSection";
 
 import { useUserStore } from "@/store/userStore";
+import { Question } from "@/types/question";
+import { questionAPI } from "@/api/question";
+import { useHistory } from "react-router-dom";
 
 export default function Main() {
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [question, setQuestion] = useState<Question>();
   const [nickname, setNickname] = useState<string>("");
 
-  const { userId } = useUserStore();
+  const { userInfo } = useUserStore();
 
   useEffect(() => {
-    if (userId) {
-      answerAPI.list({ userId }).then((res) => {
+    if (userInfo?.id) {
+      answerAPI.list().then((res) => {
         const data = res.data;
         if (data.data.list?.length) {
           setAnswers(data.data.list);
@@ -27,11 +31,29 @@ export default function Main() {
         setNickname(data.data.nickname);
       });
     }
-  }, [userId]);
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (userInfo?.id) {
+      questionAPI.getQuestion(userInfo.id).then((res) => {
+        const data = res.data.data;
+        if (data) {
+          setQuestion(data);
+        }
+      });
+    }
+  }, [userInfo]);
 
   const answerCount = answers.length;
   const previewMessage = answers[getRandomIndex(answers)];
-  const hasUserId = userId != null;
+  const hasUserId = userInfo?.id != null;
+
+  const history = useHistory();
+
+  if (!question) {
+    history.replace("/question-create");
+    return null;
+  }
 
   return (
     <>
@@ -39,12 +61,14 @@ export default function Main() {
         <NonLoggedSection />
       ) : (
         <section className="flex flex-col justify-center items-center h-screen">
-          <h2 className="font-bold text-2xl mb-2">{nickname}님의 보따리</h2>
+          <h2 className="font-bold text-h2 mb-2 text-white">
+            {nickname}님의 보따리에
+          </h2>
           {answerCount < 1 ? (
-            <WithoutAnswer userId={userId} />
+            <WithoutAnswer userId={userInfo.id} />
           ) : (
             <WithAnswer
-              userId={userId}
+              userId={userInfo.id}
               answerCount={answerCount}
               previewMessage={previewMessage}
             />

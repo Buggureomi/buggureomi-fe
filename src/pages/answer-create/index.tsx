@@ -2,7 +2,6 @@ import { useState, useMemo, useCallback, ChangeEvent } from "react";
 import { useLocation } from "react-router-dom";
 
 import { answerAPI } from "@/api/answer";
-import { memberAPI } from "@/api/member";
 
 import { Button } from "@/components/ui/button";
 
@@ -33,7 +32,6 @@ export default function AnswerCreate() {
 
   const [colorCode, setColorCode] = useState<string | undefined>(undefined);
   const [content, setContent] = useState<string>("");
-  const [userNickname, setUserNicname] = useState<string>("");
   const [senderName, setSenderName] = useState<string>("");
 
   const handleAnswerChange = useCallback(
@@ -46,26 +44,21 @@ export default function AnswerCreate() {
     []
   );
 
-  const { userId } = useUserStore();
+  const { userInfo } = useUserStore();
 
-  if (!userId) {
+  if (!userInfo?.id) {
     // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
     return <DirectLogin />;
   }
 
   const sendAnswer = async () => {
-    await memberAPI.search(userId).then((res) => {
-      const userInfo = res.data.data;
-      setUserNicname(userInfo.nickname);
-
-      answerAPI.create({
-        memberId: userId,
-        questionId: questionId,
-        nickname: userNickname,
-        sender: senderName,
-        content,
-        colorCode: colorCode ?? COLOR_CODE_LIST[0],
-      });
+    await answerAPI.create({
+      memberId: userInfo.id,
+      questionId: questionId,
+      nickname: userInfo.nickname,
+      sender: senderName,
+      content,
+      colorCode: colorCode ?? COLOR_CODE_LIST[0],
     });
   };
 

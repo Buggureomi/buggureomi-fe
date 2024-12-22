@@ -8,8 +8,8 @@ const Snowfall = () => {
 
   const [snowColorArray, setSnowColorArray] = useState<string[]>([]);
 
-  const handleSnowflakeColor = async (userId: number) => {
-    await answerAPI.list({ userId }).then((res) => {
+  const handleSnowflakeColor = async () => {
+    await answerAPI.list().then((res) => {
       const data = res.data.data;
 
       const colorArr = data.list?.map((answer) => answer.colorCode);
@@ -19,10 +19,10 @@ const Snowfall = () => {
     });
   };
 
-  const { userId } = useUserStore();
+  const { userInfo } = useUserStore();
   useEffect(() => {
-    if (userId) handleSnowflakeColor(userId);
-  }, [userId]);
+    handleSnowflakeColor();
+  }, [userInfo]);
 
   return (
     <>

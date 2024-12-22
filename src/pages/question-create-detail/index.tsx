@@ -17,9 +17,9 @@ export default function QuestionCreateDetail() {
   const location = useLocation();
   const content = (location.state as QuestionContent)?.content;
 
-  const { userId } = useUserStore();
+  const { userInfo } = useUserStore();
 
-  if (!userId) {
+  if (!userInfo?.id) {
     return <DirectLogin />;
   }
 
@@ -27,7 +27,7 @@ export default function QuestionCreateDetail() {
     // TODO: Token 구현 후 API 접목 예정
     questionAPI
       .create({
-        memberId: userId,
+        memberId: userInfo?.id,
         content: content,
         isPublicVisible: 1,
         isCountVisible: 1,
