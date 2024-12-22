@@ -6,40 +6,58 @@ import { Switch } from "@/components/ui/switch";
 import { QuestionBundle } from "@/components/question/QuestionBundle";
 import { questionAPI } from "@/api/question";
 import { useUserStore } from "@/store/userStore";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 interface QuestionContent {
   content: string; // question의 타입에 따라 변경
 }
 
 export default function QuestionCreateDetail() {
-  // const { state } = useLocation<{ content: string }>();
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<QuestionContent>();
   const content = (location.state as QuestionContent)?.content;
-
   const { userInfo } = useUserStore();
+  const { toast } = useToast();
+
+  const [settings, setSettings] = useState({
+    isCountVisible: 1,
+    isAuthRequired: 1,
+    isPublicVisible: 1,
+  });
+
+  const handleUpdateSetting = (key: keyof typeof settings) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: prev[key] === 1 ? 0 : 1,
+    }));
+  };
 
   if (!userInfo?.id) {
     return <DirectLogin />;
   }
 
-  const handleClick = () => {
-    // TODO: Token 구현 후 API 접목 예정
-    questionAPI
-      .create({
+  const handleClick = async () => {
+    try {
+      const res = await questionAPI.create({
         memberId: userInfo?.id,
-        content: content,
-        isPublicVisible: 1,
-        isCountVisible: 1,
-        isAuthRequired: 1,
-        isCommonQuestion: 1,
-      })
-      .then((res) => {
-        history.push({
-          pathname: "/question-complete",
-          state: { questionId: res.data.data.questionId },
-        });
+        content: location.state.content,
+        ...settings,
       });
+
+      toast({
+        description: "질문이 생성되었습니다.",
+      });
+      history.push({
+        pathname: "/question-complete",
+        state: { questionId: res.data.data.questionId },
+      });
+    } catch (error) {
+      toast({
+        description: "질문 생성에 실패했습니다.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -58,7 +76,11 @@ export default function QuestionCreateDetail() {
           >
             구슬(답변) 개수 공개
           </Label>
-          <Switch id="show-answer-counts" checked={true} disabled={true} />
+          <Switch
+            id="show-answer-counts"
+            checked={settings.isCountVisible === 1}
+            onCheckedChange={() => handleUpdateSetting("isCountVisible")}
+          />
         </div>
         <div className="flex items-center gap-x-2 justify-between">
           <Label
@@ -67,7 +89,11 @@ export default function QuestionCreateDetail() {
           >
             로그인 유저만 답변 가능
           </Label>
-          <Switch id="is-auth-required" checked={true} disabled={true} />
+          <Switch
+            id="is-auth-required"
+            checked={settings.isAuthRequired === 1}
+            onCheckedChange={() => handleUpdateSetting("isAuthRequired")}
+          />
         </div>
         <div className="flex items-center gap-x-2 justify-between">
           <Label
@@ -76,7 +102,11 @@ export default function QuestionCreateDetail() {
           >
             다른 유저 조회 가능
           </Label>
-          <Switch id="is-public-visible" checked={true} disabled={true} />
+          <Switch
+            id="is-public-visible"
+            checked={settings.isPublicVisible === 1}
+            onCheckedChange={() => handleUpdateSetting("isPublicVisible")}
+          />
         </div>
       </div>
       <Button className="w-72 h-12" onClick={handleClick} children={"만들기"} />
