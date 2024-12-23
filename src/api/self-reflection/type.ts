@@ -6,8 +6,12 @@ export type ReflectionQuestion = {
 };
 
 export type ReflectionRequest = {
-  questionId: number;
+  id: number;
   content: string;
+};
+
+export type SubmitReflectionsPayload = {
+  reflections: ReflectionRequest[];
 };
 
 export type QuestionResponse = BaseResponse<ReflectionQuestion[]>;
