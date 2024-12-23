@@ -25,7 +25,7 @@ export function useSelfReflection(userId: number) {
     };
 
     fetchSelfReflection();
-  }, [userId, toast]);
+  }, [userId]);
 
   return {
     selfReflection,
