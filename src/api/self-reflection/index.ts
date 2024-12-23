@@ -13,7 +13,7 @@ export const selfReflection = {
     return apiWithToken.get(`/self-reflection/list`);
   },
 
-  submitReflections: async ({ reflections }: T.SubmitReflectionsPayload) => {
+  submitReflections: async ({ reflections }: T.ReflectionParam) => {
     return apiWithToken.post(`/self-reflection`, { reflections });
   },
 };

@@ -5,13 +5,8 @@ export type ReflectionQuestion = {
   content: string;
 };
 
-export type ReflectionRequest = {
-  id: number;
-  content: string;
-};
-
-export type SubmitReflectionsPayload = {
-  reflections: ReflectionRequest[];
+export type ReflectionParam = {
+  reflections: ReflectionQuestion[];
 };
 
 export type QuestionResponse = BaseResponse<ReflectionQuestion[]>;
