@@ -10,7 +10,7 @@ export const Question = ({ align = "RIGHT", children }: QuestionProps) => {
         {children}
       </div>
       <div
-        className={`absolute -bottom-4 ${
+        className={`absolute -bottom-[0.9rem] ${
           align === "LEFT" ? "left-[20px]" : "right-[20px]"
         }`}
       >

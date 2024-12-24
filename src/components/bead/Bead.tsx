@@ -18,7 +18,7 @@ export const Bead = ({
 
   return (
     <div
-      className={`rounded-full `}
+      className={`rounded-full`}
       style={{ width: size, height: size }}
       onClick={() => onClick && onClick()}
     >
@@ -26,7 +26,7 @@ export const Bead = ({
         viewBox="0 0 100 100"
         width="100%"
         height="100%"
-        className={`${selected ? "bg-white" : ""}`}
+        className={`${selected ? "bg-[#DDE3FF] rounded-md" : ""}`}
       >
         <defs>
           <radialGradient id={gradientId} cx="40%" cy="40%">

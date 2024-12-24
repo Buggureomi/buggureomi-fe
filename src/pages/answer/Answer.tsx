@@ -44,12 +44,13 @@ export function Answer() {
 
   useEffect(() => {
     getQuestionInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sqidsId, history]);
 
   useEffect(() => {
     if (selectedType === "START") {
       if (!isAuthRequired || (isAuthRequired && userInfo?.id)) {
-        // 로그인이 필요없거나, 필요하지만 이미 로그인된 경우
+        // MEMO: 로그인이 필요없거나, 필요하지만 이미 로그인된 경우
         history.push({
           pathname: "/answer-create",
           state: { questionId },

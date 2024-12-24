@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, ChangeEvent, useEffect } from "react";
+import { useState, useCallback, ChangeEvent } from "react";
 import { useLocation } from "react-router-dom";
 
 import { answerAPI } from "@/api/answer";
@@ -12,6 +12,7 @@ import { COLOR_CODE_LIST } from "@/constant/color";
 import { useUserStore } from "@/store/userStore";
 import { Bead } from "@/components/bead/Bead";
 import { IoChevronForward } from "react-icons/io5";
+import TextFieldWrapper from "@/components/common/TextFieldWrapper";
 
 const colorGroups = [
   ["EF4C4D", "FF884D", "FFC44E", "89C94D", "0A8403"],
@@ -61,7 +62,7 @@ export default function AnswerCreate() {
   };
 
   return (
-    <section className="h-screen flex flex-col items-center gap-[24px]">
+    <section className="h-screen flex flex-col gap-[24px]">
       <div className="flex flex-col items-center ">
         <p className="text-center text-white text-xl">
           000님이
@@ -94,34 +95,25 @@ export default function AnswerCreate() {
         </p>
       </div>
       <div className="space-y-4">
-        <div>
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-white text-xs font-medium">답변 작성</h2>
-            <span className="text-white text-sm">
-              ({content.length}/{300})
-            </span>
-          </div>
-          <textarea
-            value={content}
-            onChange={handleAnswerChange}
-            placeholder="답변 작성"
-            maxLength={300}
-            className="w-full p-4 rounded-2xl bg-white resize-none h-32 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-        </div>
-        <div>
-          <h2 className="text-white text-xs font-medium mb-2">보내는 사람</h2>
-          <input
-            value={senderName}
-            onChange={(e) => setSenderName(e.target.value)}
-            placeholder="이름 입력"
-            className="w-full rounded-2xl bg-white h-10 px-4 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-        </div>
+        <TextFieldWrapper
+          title="답변 작성"
+          value={content}
+          onChange={setContent}
+          maxLength={300}
+          multiline
+          placeholder="답변 작성"
+          size="l"
+        />
+        <TextFieldWrapper
+          title="보내는 사람"
+          value={senderName}
+          onChange={setSenderName}
+          placeholder="이름 입력"
+        />
       </div>
       <div className="flex w-full	justify-center">
         <Button
-          className="w-72 h-12 mt-[0.5rem] text-[#F3F3F3] bg-[#667EF5]"
+          className="w-full"
           children={
             <div className="w-full flex flex-row items-center">
               <span className="grow">다음</span>
