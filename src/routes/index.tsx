@@ -16,7 +16,7 @@ import SelfReflection from "@/pages/self-reflection";
 import QuestionComplete from "@/pages/question-complete";
 import PrivateRoute from "@/routes/PrivateRoute";
 import RootLayout from "@/components/RootLayout";
-import { Answer } from "@/pages/answer/Answer";
+import { Answer } from "@/pages/answer/index";
 import { DialogProvider } from "@/contexts/DialogContext";
 
 export default function Routing() {

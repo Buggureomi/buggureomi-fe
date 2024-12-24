@@ -1,4 +1,4 @@
-import buddle from "@/assets/bunddle.svg";
+import pouch from "@/shared/assets/pouch/pouch.svg";
 import { BottomSheet } from "@/components/bottom-sheet/BottomSheet";
 import { Button } from "@/components/ui/button";
 import { Question } from "../question/Question";
@@ -14,19 +14,16 @@ export function AnswerDescButtonSheet({
   onStart,
 }: AnswerDescButtonSheetProps) {
   return (
-    <BottomSheet
-      isVisible={true}
-      onClose={onClose}
-      style={{ background: "#D6D8E1" }}
-    >
+    <BottomSheet isVisible onClose={onClose} style={{ background: "#D6D8E1" }}>
       <div className="h-[30rem] p-[2.5rem]">
+        {/* MEMO: 팝오버 타이틀에 '설명' 이라는 단어가 적절한지 논의 필요  */}
         <div className="text-sm text-[#333333] mb-4">설명</div>
         <div className="flex w-full justify-center">
           <div className="w-[17.5rem] h-[17.1875rem] bg-[#C9CCDA] rounded-[1.25rem]">
             <div className="flex items-center justify-center flex-col p-[1.25rem]">
               <div className="flex w-full	justify-between	">
                 <Question align="LEFT">
-                  <img src={buddle} className="h-[3.75rem]" alt="bundle" />
+                  <img src={pouch} className="h-[3.75rem]" alt="bundle" />
                   <p className="text-center text-[#667EF5] ">
                     구슬을 담는
                     <br />

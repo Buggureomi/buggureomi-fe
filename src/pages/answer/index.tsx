@@ -5,6 +5,7 @@ import { AnswerStartButton } from "./answer-start-botton-sheet/AnswerStartBotton
 import { useUserStore } from "@/store/userStore";
 import { useHistory, useLocation } from "react-router-dom";
 import { questionAPI } from "@/api/question";
+import mascot_front_standing from "@/shared/assets/mascot/mascot-front-standing.svg";
 import { useToast } from "@/hooks/use-toast";
 
 function useQuery() {
@@ -34,7 +35,7 @@ export function Answer() {
       const res = await questionAPI.getQuestion(sqidsId);
       setIsAuthRequired(res.data.data.is_Auth_Required === 1);
       setQuestionId(res.data.data.questionId);
-    } catch (error) {
+    } catch {
       toast({
         description: "질문 정보를 불러오는데 실패했습니다.",
         variant: "destructive",
@@ -60,7 +61,7 @@ export function Answer() {
   }, [selectedType, isAuthRequired, userInfo, questionId, history]);
 
   // if (!userInfo?.id) {
-  //   // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
+  //   // TODO: 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
   //   return <DirectLogin />;
   // }
 
@@ -72,18 +73,20 @@ export function Answer() {
           <p className="text-lg font-light">질문 보따리가 왔어!</p>
         </div>
         <div className="relative w-full flex justify-center items-center">
-          <div className="absolute  md:w-96 lg:w-[30rem] top-36 z-[auto]">
+          {/* MEMO: 말풍선 디자인 논의 필요 */}
+          {/* <div className="absolute  md:w-96 lg:w-[30rem] top-36 z-[auto]">
             <img
               src="/images/arrow.png"
               alt="arrow"
               className="w-full h-auto"
             />
-          </div>
-          <div className="relative w-96 h-96 translate-x-[40%]">
+          </div> */}
+          {/* MEMO: 마스코트 디자인 논의 필요 */}
+          <div className="relative w-96 h-96">
             <img
-              src="/images/bear.png"
+              src={mascot_front_standing}
               alt="Bear"
-              className="w-full h-full object-contain rotate-[-45deg]"
+              className="w-full h-full rotate-[35deg]"
             />
           </div>
         </div>

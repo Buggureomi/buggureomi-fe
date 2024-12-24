@@ -1,10 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { useHistory } from "react-router-dom";
-import mascot_back from "@/assets/mascot_back.svg";
-import { FaLink } from "react-icons/fa6";
+import mascot_back from "@/shared/assets/mascot/mascot-back-standing.svg";
+import ShareButton from "@/components/share/ShareButton";
+import { ShareDialog } from "@/components/share/ShareDialog";
+import { DirectLogin } from "@/components/display/DirectLogin";
+import { useUserStore } from "@/store/userStore";
+import { DialogProvider } from "@/contexts/DialogContext";
 
 export default function QuestionComplete() {
+  const { userInfo } = useUserStore();
+
   const history = useHistory();
+
+  if (!userInfo?.id) {
+    return <DirectLogin />;
+  }
 
   return (
     <section className="flex flex-col items-center gap-4 justify-evenly h-screen">
@@ -14,7 +24,7 @@ export default function QuestionComplete() {
         질문을 공유해볼까요?
       </p>
 
-      <img src={mascot_back} className="w-40 h-40" alt="bundle" />
+      <img src={mascot_back} className="w-36 h-64" alt="bundle" />
 
       <div className="flex flex-col gap-4 w-full">
         <Button
@@ -24,22 +34,14 @@ export default function QuestionComplete() {
           }}
           children={"완료"}
         />
-        <Button
-          className="w-full bg-white"
-          onClick={() => {
-            history.push("/main");
-          }}
-          children={
-            <div className="w-full flex flex-row items-center justify-center gap-2">
-              <FaLink
-                color="#667EF5"
-                size={25}
-                style={{ width: "1.5rem", height: "1.5rem" }}
-              />
-              <span className="text-primary">링크 공유하기</span>
-            </div>
-          }
-        />
+        <DialogProvider>
+          <ShareButton
+            icon={{ style: { color: "#667EF5" } }}
+            className="flex gap-1 bg-white text-[#667EF5]"
+            children="링크 공유하기"
+          />
+          <ShareDialog userId={userInfo.id} />
+        </DialogProvider>
       </div>
     </section>
   );

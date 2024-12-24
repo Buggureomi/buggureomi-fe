@@ -52,7 +52,7 @@ export default function QuestionCreateDetail() {
         pathname: "/question-complete",
         state: { questionId: res.data.data.questionId },
       });
-    } catch (error) {
+    } catch {
       toast({
         description: "질문 생성에 실패했습니다.",
         variant: "destructive",

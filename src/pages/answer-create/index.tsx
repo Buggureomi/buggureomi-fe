@@ -1,5 +1,5 @@
-import { useState, useCallback, ChangeEvent } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+// import { useLocation } from "react-router-dom";
 
 import { answerAPI } from "@/api/answer";
 
@@ -13,6 +13,7 @@ import { useUserStore } from "@/store/userStore";
 import { Bead } from "@/components/bead/Bead";
 import { IoChevronForward } from "react-icons/io5";
 import TextFieldWrapper from "@/components/common/TextFieldWrapper";
+import { useToast } from "@/hooks/use-toast";
 
 const colorGroups = [
   ["EF4C4D", "FF884D", "FFC44E", "89C94D", "0A8403"],
@@ -20,51 +21,54 @@ const colorGroups = [
   ["FFC088", "BD6C41", "FFFFFF", "8E8E8E", "000000"],
 ];
 
-interface QuestionId {
-  questionId: string;
-}
+/** @todo 라우트 작업 후 questionId로 질문 정보 조회하는 api 연결 시 주석 해제*/
+//interface QuestionId {
+//   questionId: string;
+// }
 
 export default function AnswerCreate() {
-  const location = useLocation<QuestionId>();
-  const questionId = location.state?.questionId;
-  // TODO: questionId로 질문 정보 조회하는 api 연결 필요
+  const { toast } = useToast();
+  const { userInfo } = useUserStore();
+  // const location = useLocation<QuestionId>();
+
+  // const questionId = location.state?.questionId;
 
   const [colorCode, setColorCode] = useState<string | undefined>(undefined);
   const [content, setContent] = useState<string>("");
   const [senderName, setSenderName] = useState<string>("");
 
-  const handleAnswerChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
-      const inputText = e.target.value;
-      if (inputText.length <= 300) {
-        setContent(inputText);
-      }
-    },
-    []
-  );
-  const { userInfo } = useUserStore();
-
   if (!userInfo?.id) {
-    // TODO: 추후 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
+    // TODO: 질문에 설정된 옵션에 따라 login 체크 여부 나뉘도록 설정 필요
     return <DirectLogin />;
   }
   const sendAnswer = async () => {
-    if (!questionId) return;
+    // if (!questionId) return;
 
-    await answerAPI.create({
-      memberId: userInfo.id,
-      questionId: questionId,
-      nickname: userInfo.nickname,
-      sender: senderName,
-      content,
-      colorCode: colorCode ?? COLOR_CODE_LIST[0],
-    });
+    await answerAPI
+      .create({
+        memberId: 24, // MOCK, memberId 할당 필요
+        questionId: 24, // MOCK, questionId 할당 필요
+        nickname: userInfo.nickname,
+        sender: senderName,
+        content,
+        colorCode: colorCode ?? COLOR_CODE_LIST[0],
+      })
+      .then(() => {
+        //
+      })
+      .catch(() => {
+        toast({
+          description: "구슬 생성에 실패했습니다.",
+          variant: "destructive",
+        });
+      });
   };
 
   return (
     <section className="h-screen flex flex-col gap-[24px]">
       <div className="flex flex-col items-center ">
         <p className="text-center text-white text-xl">
+          {/* TODO: MOCK, 라우트 작업 후 조회한 닉네임으로 변경 필요*/}
           000님이
           <br />
           답변을 기다려요!
