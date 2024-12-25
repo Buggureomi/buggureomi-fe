@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 
 import AnswerList from "@/components/answer/AnswerList";
 import AnswerDetailDialog from "@/components/answer/dialog/AnswerDetailDialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { answerAPI } from "@/api/answer";
 import { Answer } from "@/types/answer";
@@ -113,6 +114,10 @@ export default function AnswerResult() {
         onScroll={handleScroll}
       >
         <AnswerList listData={answersData} onDialogOpen={handleDialogToggle} />
+
+        {isLoading && (
+          <Skeleton className="w-[calc(100%-1.5rem)] h-28 mx-auto mt-4 bg-gray-400" />
+        )}
       </div>
 
       {selectedItem && (
