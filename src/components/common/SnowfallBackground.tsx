@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useSnowStore } from "@/store/snowStore";
+import "./snowFall.css";
 
 const SnowfallBackground = () => {
   const snowflakes = Array.from({ length: 50 });
@@ -30,7 +31,7 @@ const SnowfallBackground = () => {
           key={index}
           className="snowflake"
           style={{
-            left: `${Math.random() * 100}vw`,
+            left: `${Math.random() * 95}vw`,
             animationDuration: `${Math.random() * 3 + 2}s`,
             animationDelay: `${Math.random() * 5}s`,
             background:
