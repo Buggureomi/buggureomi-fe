@@ -3,7 +3,7 @@ import { answerAPI } from "@/api/answer";
 
 import { useUserStore } from "@/store/userStore";
 
-const Snowfall = () => {
+const SnowfallBackground = () => {
   const snowflakes = Array.from({ length: 50 });
 
   const [snowColorArray, setSnowColorArray] = useState<string[]>([]);
@@ -43,4 +43,4 @@ const Snowfall = () => {
   );
 };
 
-export default Snowfall;
+export default SnowfallBackground;

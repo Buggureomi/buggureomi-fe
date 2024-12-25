@@ -1,12 +1,12 @@
 import Routing from "@/routes";
 
-import Snowfall from "@/components/common/snowFall";
+import SnowfallBackground from "@/components/common/SnowfallBackground";
 import "./components/common/snowFall.css";
 
 function App() {
   return (
     <>
-      <Snowfall />
+      <SnowfallBackground />
       <Routing />
     </>
   );
