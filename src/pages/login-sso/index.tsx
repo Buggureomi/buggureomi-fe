@@ -13,11 +13,17 @@ export default function MemberLogin() {
 
   const history = useHistory();
 
-  function goToJoinPage() {
+  const goToJoinPage = () => {
     history.push("/member-join");
-  }
+  };
+
+  const handleOauthLogin = (type: "kakao") => {
+    sessionStorage.setItem("sso_type", type);
+    memberAPI.ssoLogin(type);
+  };
 
   useEffect(() => {
+    sessionStorage.clear();
     if (userInfo) {
       history.push("/main");
     }
@@ -42,7 +48,7 @@ export default function MemberLogin() {
       </div>
 
       <Button
-        onClick={() => memberAPI.ssoLogin()}
+        onClick={() => handleOauthLogin("kakao")}
         className="bg-[#FEE500] w-full"
       >
         <img src={kakao_login_button} alt="카카오 로그인" />

@@ -10,8 +10,10 @@ export const memberAPI = {
 
     return res;
   },
-  ssoLogin: async () => {
-    window.location.href = import.meta.env.VITE_API_KAKAO_LOGIN;
+  ssoLogin: async (type: "kakao") => {
+    if (type === "kakao") {
+      window.location.href = import.meta.env.VITE_API_KAKAO_LOGIN;
+    }
   },
   emailLogin: async (
     param: T.MemberLoginParam
