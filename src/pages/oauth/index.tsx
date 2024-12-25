@@ -1,4 +1,4 @@
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Redirect } from "react-router-dom";
 import { memberAPI } from "@/api/member";
 
 import { tokenCookie } from "@/lib/authToken";
@@ -13,7 +13,14 @@ export default function OAuth() {
 
   const { setUserInfo } = useUserStore();
 
-  if (code) {
+  // URL 직접 접근 여부 확인
+  const allowedReferers = import.meta.env.VITE_ALLOWED_REFERRERS.split(",");
+  const referrer = document.referrer;
+
+  const isDirectAccess = !referrer;
+  const isAllowedDomain = allowedReferers.includes(referrer);
+
+  if (code && !isDirectAccess && isAllowedDomain) {
     memberAPI.getToken({ code }).then((res) => {
       const data = res.data;
 
@@ -66,6 +73,8 @@ export default function OAuth() {
     });
   }
 
+  if (isDirectAccess || !isAllowedDomain)
+    return <Redirect to="/member-login" />;
   return (
     <div className="flex flex-col gap-4 mt-8">
       <Skeleton className="w-full h-10 bg-gray-400" />
