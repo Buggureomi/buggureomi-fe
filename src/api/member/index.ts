@@ -11,6 +11,7 @@ export const memberAPI = {
     return res;
   },
   ssoLogin: async (type: "kakao") => {
+    // COMMENT & TODO: google, naver 등 추가 가능성 있음
     if (type === "kakao") {
       window.location.href = import.meta.env.VITE_API_KAKAO_LOGIN;
     }

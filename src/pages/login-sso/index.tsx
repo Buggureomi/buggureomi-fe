@@ -18,6 +18,7 @@ export default function MemberLogin() {
   };
 
   const handleOauthLogin = (type: "kakao") => {
+    // COMMENT & TODO: google, naver 등 추가 가능성 있음
     sessionStorage.setItem("sso_type", type);
     memberAPI.ssoLogin(type);
   };
