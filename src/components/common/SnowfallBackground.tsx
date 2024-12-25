@@ -1,28 +1,27 @@
 import { useEffect, useState } from "react";
-import { answerAPI } from "@/api/answer";
 
-import { useUserStore } from "@/store/userStore";
+import { useSnowStore } from "@/store/snowStore";
 
 const SnowfallBackground = () => {
   const snowflakes = Array.from({ length: 50 });
-
   const [snowColorArray, setSnowColorArray] = useState<string[]>([]);
 
-  const handleSnowflakeColor = async () => {
-    await answerAPI.list().then((res) => {
-      const data = res.data.data;
+  const { colorCodeList } = useSnowStore();
 
-      const colorArr = data.list?.map((answer) => answer.colorCode);
+  useEffect(() => {
+    if (colorCodeList?.length) {
+      const colorArr: string[] = ["#FFFFFF"];
+
+      colorCodeList.map((answer) => {
+        if (colorArr.includes(answer.colorCode)) return;
+        else colorArr.push(answer.colorCode);
+      });
+
       if (colorArr?.length) {
         setSnowColorArray(colorArr);
       }
-    });
-  };
-
-  const { userInfo } = useUserStore();
-  useEffect(() => {
-    handleSnowflakeColor();
-  }, [userInfo]);
+    }
+  }, [colorCodeList]);
 
   return (
     <>
