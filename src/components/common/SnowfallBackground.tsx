@@ -10,18 +10,13 @@ const SnowfallBackground = () => {
   const { colorCodeList } = useSnowStore();
 
   useEffect(() => {
-    if (colorCodeList?.length) {
-      const colorArr: string[] = ["#FFFFFF"];
+    const colorSet = new Set(["#FFFFFF"]);
 
-      colorCodeList.map((answer) => {
-        if (colorArr.includes(answer.colorCode)) return;
-        else colorArr.push(answer.colorCode);
-      });
+    colorCodeList?.forEach((answer) => {
+      colorSet.add(answer.colorCode);
+    });
 
-      if (colorArr?.length) {
-        setSnowColorArray(colorArr);
-      }
-    }
+    setSnowColorArray([...colorSet]);
   }, [colorCodeList]);
 
   return (

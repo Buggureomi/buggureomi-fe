@@ -8,7 +8,7 @@ interface SnowStore {
 }
 
 export const useSnowStore = create<SnowStore>()((set) => ({
-  colorCodeList: [],
+  colorCodeList: null,
   setColorCodeList: (codeList) => set({ colorCodeList: codeList }),
   clearColorCodeList: () => set({ colorCodeList: [] }),
 }));

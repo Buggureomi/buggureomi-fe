@@ -33,8 +33,7 @@ export default function AnswerResult() {
 
     setIsLoading(true);
     try {
-      const res = await answerAPI.list(paramRef.current);
-      const data = res.data;
+      const { data } = await answerAPI.list(paramRef.current);
 
       if (data.status === "OK" && data.data.list) {
         // totalCount는 최초에만 설정
@@ -46,7 +45,7 @@ export default function AnswerResult() {
         setAnswersData((prev) => [...prev, ...newAnswers]);
 
         // 마지막 페이지인지 체크
-        if (newAnswers.length !== paramRef.current.limit) {
+        if (data.data.currentPage === data.data.totalPage) {
           setHasMore(false);
         }
         // param 업데이트
