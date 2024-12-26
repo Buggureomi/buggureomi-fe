@@ -30,8 +30,6 @@ export default function OAuth() {
     }
   };
 
-  console.log("check", checkProperAccess());
-
   if (code && checkProperAccess()) {
     memberAPI.getToken({ code }).then((res) => {
       const data = res.data;
@@ -50,6 +48,7 @@ export default function OAuth() {
               if (data.status === "OK") {
                 // Case0: 토큰 발행 O & 유저 정보 호출 O
                 setUserInfo(data.data);
+                sessionStorage.clear();
                 history.push("/main");
               } else {
                 // Case1: 토큰 API O & 유저 정보 API X
