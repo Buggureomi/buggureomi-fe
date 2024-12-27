@@ -6,8 +6,7 @@ import { useUserStore } from "@/store/userStore";
 
 import { Button } from "@/components/ui/button";
 import mascot_front_standing from "@/shared/assets/mascot/mascot-front-standing.svg";
-import { MessageCircle } from "lucide-react";
-
+import { BsChatFill } from "react-icons/bs";
 export default function MemberLogin() {
   const { userInfo } = useUserStore();
 
@@ -55,7 +54,7 @@ export default function MemberLogin() {
             onClick={() => handleOauthLogin("kakao")}
             className="bg-[#FEE500] w-full text-[#3C1E1E]"
           >
-            <MessageCircle fill="#3C1E1E" size={48} />
+            <BsChatFill fill="#3C1E1E" size={48} />
             <p className="text-[18px]">카카오톡으로 로그인</p>
           </Button>
         </div>
