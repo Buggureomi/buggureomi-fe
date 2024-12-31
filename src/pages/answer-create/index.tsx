@@ -46,7 +46,9 @@ export default function AnswerCreate() {
         colorCode: colorCode ?? COLOR_CODE_LIST[0],
       });
       history.push(
-        `/answer-create-complete?question=${sqidsId}&count=${data.data.totalCount}`
+        `/answer-create-complete?question=${sqidsId}&count=${
+          data.data.totalCount === -1 ? "n" : data.data.totalCount
+        }`
       );
     } catch (error) {
       toast({
