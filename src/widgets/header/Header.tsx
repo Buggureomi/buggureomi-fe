@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SettingsSheet from "@/features/settings/SettingsSheet";
 import BackHeader from "@/components/back-header/BackHeader";
+import { useUserStore } from "@/store/userStore";
 
 export default function Header() {
-  const history = useHistory();
-  const [isMainPage, setIsMainPage] = useState(
-    history.location.pathname === "/main"
-  );
+  const location = useLocation();
+  const { userInfo } = useUserStore();
+  const isAuthenticated = !!userInfo?.id;
+
+  const [isMainPage, setIsMainPage] = useState(false);
 
   useEffect(() => {
-    const unlisten = history.listen((location) => {
-      setIsMainPage(location.pathname === "/main");
-    });
-
-    return () => {
-      unlisten();
-    };
-  }, [history]);
+    setIsMainPage(location.pathname === "/main" && isAuthenticated);
+  }, [location, isAuthenticated]);
 
   return (
     <div className="flex items-center justify-between pt-4">
