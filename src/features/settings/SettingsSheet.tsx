@@ -176,8 +176,8 @@ export default function SettingsSheet() {
             </Label>
             <Switch
               id="marble-count"
-              checked={settings.isAuthRequired === 1}
-              onCheckedChange={() => handleUpdateSetting("isAuthRequired")}
+              checked={settings.isPublicVisible === 1}
+              onCheckedChange={() => handleUpdateSetting("isPublicVisible")}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -186,8 +186,8 @@ export default function SettingsSheet() {
             </Label>
             <Switch
               id="login-required"
-              checked={settings.isPublicVisible === 1}
-              onCheckedChange={() => handleUpdateSetting("isPublicVisible")}
+              checked={settings.isAuthRequired === 1}
+              onCheckedChange={() => handleUpdateSetting("isAuthRequired")}
             />
           </div>
           <div className="flex items-center justify-between">
