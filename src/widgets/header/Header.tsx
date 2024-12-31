@@ -10,15 +10,20 @@ export default function Header() {
   const isAuthenticated = !!userInfo?.id;
 
   const [isMainPage, setIsMainPage] = useState(false);
+  const [isShowOnlyLogout, setIsShowOnlyLogout] = useState(false);
 
   useEffect(() => {
-    setIsMainPage(location.pathname === "/main" && isAuthenticated);
+    const isMain = location.pathname === "/main" && isAuthenticated;
+    const isQuestionRoute = location.pathname.startsWith("/question");
+
+    setIsMainPage(isMain || isQuestionRoute);
+    setIsShowOnlyLogout(isQuestionRoute);
   }, [location, isAuthenticated]);
 
   return (
     <div className="flex items-center justify-between pt-4">
       <BackHeader />
-      {isMainPage && <SettingsSheet />}
+      {isMainPage && <SettingsSheet showOnlyLogout={isShowOnlyLogout} />}
     </div>
   );
 }
