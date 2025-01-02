@@ -54,14 +54,12 @@ export default function Main() {
         </div>
       ) : (
         <DialogProvider>
-          <div className="flex flex-col justify-center my-auto">
-            <h2 className="font-bold text-h2 mb-2 text-center text-white">
-              {mainPageInfo.nickname}님의 보따리에
-            </h2>
+          <div className="flex flex-col h-full">
             {mainPageInfo.totalCount < 1 ? (
               <WithoutAnswer
                 userId={userInfo.id}
                 questionContent={mainPageInfo.content}
+                nickname={mainPageInfo.nickname}
               />
             ) : (
               <WithAnswer userId={userInfo.id} mainPageInfo={mainPageInfo} />
