@@ -24,7 +24,7 @@ export default function WithoutAnswer({ userId, questionContent }: Props) {
       <span className="text-white font-nanum-dahaengce mb-2">
         다시 한번 공유해볼까요?
       </span>
-      <footer className="w-full pt-10">
+      <footer className="w-full py-10">
         <ReflectionButton userId={userId} />
         <ShareButton className="w-full mt-2">공유</ShareButton>
       </footer>

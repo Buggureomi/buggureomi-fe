@@ -43,7 +43,7 @@ export default function WithAnswer({
       <span className="font-nanum-dahaengce mb-4 text-white text-xl">
         누구의 쪽지일까요? 지금 열어보세요!
       </span>
-      <footer className="w-full">
+      <footer className="w-full py-10">
         <Button
           className="mb-2 w-full"
           children="열어보기"
