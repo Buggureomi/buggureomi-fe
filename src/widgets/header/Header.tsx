@@ -4,28 +4,53 @@ import { useLocation } from "react-router-dom";
 import { useUserStore } from "@/store/userStore";
 
 import BackButton from "@/components/header-button/BackButton";
+import HomeButton from "@/components/header-button/HomeButton";
 import SettingsSheet from "@/features/settings/SettingsSheet";
+
+import MASCOT_ICON from "@/assets/image/main/mascot_icon.png";
 
 export default function Header() {
   const location = useLocation();
   const { userInfo } = useUserStore();
   const isAuthenticated = !!userInfo?.id;
 
-  const [isMainPage, setIsMainPage] = useState(false);
+  const [isShowBackButton, setIsShowBackButton] = useState(false);
+  const [isShowHomeButton, setIsShowHomeButton] = useState(false);
+  const [isShowSettingButton, setIsShowSettingButton] = useState(false);
   const [isShowOnlyLogout, setIsShowOnlyLogout] = useState(false);
 
   useEffect(() => {
-    const isMain = location.pathname === "/main" && isAuthenticated;
+    const isLoginPage = location.pathname === "/member-login";
+    const isMainPage = location.pathname === "/main" && isAuthenticated;
+    const isAnswerIntro = location.pathname === "/answer";
+    const isCreatedCompletePage =
+      (location.pathname === "/question-create-complete" && isAuthenticated) ||
+      location.pathname === "/answer-create-complete";
     const isQuestionRoute = location.pathname.startsWith("/question");
 
-    setIsMainPage(isMain || isQuestionRoute);
+    setIsShowBackButton(!isMainPage && !isLoginPage && !isAnswerIntro);
+    setIsShowHomeButton(isCreatedCompletePage || isAnswerIntro);
+
+    setIsShowSettingButton(isMainPage || isQuestionRoute);
     setIsShowOnlyLogout(isQuestionRoute);
   }, [location, isAuthenticated]);
 
   return (
     <header className="flex items-center justify-between pt-4">
-      <BackButton />
-      {isMainPage && <SettingsSheet showOnlyLogout={isShowOnlyLogout} />}
+      {isShowBackButton ? (
+        <BackButton />
+      ) : isShowHomeButton ? (
+        <HomeButton />
+      ) : (
+        location.pathname === "/main" && (
+          <div className="w-12">
+            <img src={MASCOT_ICON} alt="mascot" className="w-full" />
+          </div>
+        )
+      )}
+      {isShowSettingButton && (
+        <SettingsSheet showOnlyLogout={isShowOnlyLogout} />
+      )}
     </header>
   );
 }
