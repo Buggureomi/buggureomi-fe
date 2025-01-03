@@ -24,30 +24,40 @@ const renewToken = async (
 
   return res;
 };
+let refreshTokenPromise: Promise<void> | null = null;
 const refreshAccessToken = async () => {
-  const refreshToken = tokenCookie.getCookie("refreshToken");
-
-  if (!refreshToken) {
-    localStorage.removeItem("user-storage");
-
-    throw new Error("There is no refresh token");
+  if (refreshTokenPromise) {
+    return refreshTokenPromise;
   }
 
-  await renewToken({ refreshToken }).then((res) => {
-    const data = res.data;
+  refreshTokenPromise = (async () => {
+    try {
+      const refreshToken = tokenCookie.getCookie("refreshToken");
 
-    if (data.status === "OK") {
-      tokenCookie.setCookie("accessToken", data.data.accessToken, 0.25);
-      tokenCookie.setCookie("refreshToken", data.data.refreshToken, 1);
-    } else if (data.status === "NOT_FOUND") {
-      // 해당하는 유저 정보가 없습니다.
-      tokenCookie.deleteCookie("refreshToken");
-      throw new Error(data.message);
-    } else {
-      // 통신 에러
-      throw new Error(data.message);
+      if (!refreshToken) {
+        localStorage.removeItem("user-storage");
+        throw new Error("There is no refresh token");
+      }
+
+      const res = await renewToken({ refreshToken });
+      const data = res.data;
+
+      if (data.status === "OK") {
+        tokenCookie.setCookie("accessToken", data.data.accessToken, 0.25);
+        tokenCookie.setCookie("refreshToken", data.data.refreshToken, 1);
+      } else if (data.status === "NOT_FOUND") {
+        // 해당하는 유저 정보가 없습니다.
+        throw new Error(data.message);
+      } else {
+        // 통신 에러
+        throw new Error(data.message);
+      }
+    } finally {
+      refreshTokenPromise = null;
     }
-  });
+  })();
+
+  return refreshTokenPromise;
 };
 
 const createAxiosInstance = (withToken: boolean = false): AxiosInstance => {
