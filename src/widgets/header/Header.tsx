@@ -21,9 +21,9 @@ export default function Header() {
   }, [location, isAuthenticated]);
 
   return (
-    <div className="flex items-center justify-between pt-4">
+    <header className="flex items-center justify-between pt-4">
       <BackHeader />
       {isMainPage && <SettingsSheet showOnlyLogout={isShowOnlyLogout} />}
-    </div>
+    </header>
   );
 }
