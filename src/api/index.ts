@@ -17,10 +17,6 @@ const HEADERS: Record<string, string | boolean> = {
   withCredentials: true,
 };
 
-const createAxios = (): AxiosInstance => {
-  return axios.create({ baseURL: BASE_URL + VERSION, headers: HEADERS });
-};
-
 const renewToken = async (
   param: T.RefreshTokenParam
 ): Promise<AxiosResponse<T.RefreshTokenResponse>> => {
@@ -54,42 +50,46 @@ const refreshAccessToken = async () => {
   });
 };
 
-const interceptors = (): AxiosInstance => {
+const createAxiosInstance = (withToken: boolean = false): AxiosInstance => {
   const instance = axios.create({
     baseURL: BASE_URL + VERSION,
     headers: HEADERS,
   });
-  instance.interceptors.request.use(
-    async (config: InternalAxiosRequestConfig) => {
-      if (!config.headers) {
-        config.headers = new AxiosHeaders();
-      }
 
-      const accessToken = tokenCookie.getCookie("accessToken");
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      } else {
-        try {
-          await refreshAccessToken();
-          config.headers.Authorization = `Bearer ${tokenCookie.getCookie(
-            "accessToken"
-          )}`;
-        } catch {
-          tokenCookie.deleteCookie("refreshToken");
-          localStorage.removeItem("user-storage");
+  if (withToken) {
+    instance.interceptors.request.use(
+      async (config: InternalAxiosRequestConfig) => {
+        if (!config.headers) {
+          config.headers = new AxiosHeaders();
         }
+
+        const accessToken = tokenCookie.getCookie("accessToken");
+        if (accessToken) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+        } else {
+          try {
+            await refreshAccessToken();
+            config.headers.Authorization = `Bearer ${tokenCookie.getCookie(
+              "accessToken"
+            )}`;
+          } catch {
+            tokenCookie.deleteCookie("refreshToken");
+            localStorage.removeItem("user-storage");
+          }
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+    );
+  }
+
   return instance;
 };
 
 // No token
-export const api = createAxios();
+export const api = createAxiosInstance();
 
 // With token
-export const apiWithToken = interceptors();
+export const apiWithToken = createAxiosInstance(true);

@@ -25,7 +25,7 @@ export default function OAuth() {
       if (!referrer) {
         return true;
       } else {
-        if (allowedReferers.includes(referrer)) return true;
+        return allowedReferers.includes(referrer);
       }
     }
   };
