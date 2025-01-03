@@ -43,8 +43,13 @@ const refreshAccessToken = async () => {
     if (data.status === "OK") {
       tokenCookie.setCookie("accessToken", data.data.accessToken, 0.25);
       tokenCookie.setCookie("refreshToken", data.data.refreshToken, 1);
+    } else if (data.status === "NOT_FOUND") {
+      // 해당하는 유저 정보가 없습니다.
+      tokenCookie.deleteCookie("refreshToken");
+      throw new Error(data.message);
     } else {
-      throw new Error(data.status);
+      // 통신 에러
+      throw new Error(data.message);
     }
   });
 };
@@ -64,10 +69,15 @@ const interceptors = (): AxiosInstance => {
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       } else {
-        await refreshAccessToken();
-        config.headers.Authorization = `Bearer ${tokenCookie.getCookie(
-          "accessToken"
-        )}`;
+        try {
+          await refreshAccessToken();
+          config.headers.Authorization = `Bearer ${tokenCookie.getCookie(
+            "accessToken"
+          )}`;
+        } catch {
+          tokenCookie.deleteCookie("refreshToken");
+          localStorage.removeItem("user-storage");
+        }
       }
       return config;
     },
