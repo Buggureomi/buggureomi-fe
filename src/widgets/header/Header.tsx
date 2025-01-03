@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import SettingsSheet from "@/features/settings/SettingsSheet";
-import BackHeader from "@/components/back-header/BackHeader";
+
 import { useUserStore } from "@/store/userStore";
+
+import BackButton from "@/components/header-button/BackButton";
+import SettingsSheet from "@/features/settings/SettingsSheet";
 
 export default function Header() {
   const location = useLocation();
@@ -22,7 +24,7 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between pt-4">
-      <BackHeader />
+      <BackButton />
       {isMainPage && <SettingsSheet showOnlyLogout={isShowOnlyLogout} />}
     </header>
   );
