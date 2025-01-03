@@ -1,6 +1,6 @@
-import { FaArrowLeft } from "react-icons/fa";
-import { cn } from "@/lib/utils";
 import { useHistory } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { FaArrowLeft } from "react-icons/fa";
 
 type Props = {
   className?: string;
