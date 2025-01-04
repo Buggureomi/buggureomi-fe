@@ -57,7 +57,7 @@ export default function AnswerDetailDialog({
           </p>
 
           <DialogFooter>
-            <Button onClick={handleDialogToggle}>닫기</Button>
+            <Button onClick={onClose}>닫기</Button>
             {!isGuestAccess && (
               <Button
                 onClick={handleDialogToggle}
