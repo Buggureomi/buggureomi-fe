@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useUserStore } from "@/store/userStore";
+import { useLoginCheck } from "@/hooks/useLoginCheck";
 
 import BackButton from "@/components/header-button/BackButton";
 import HomeButton from "@/components/header-button/HomeButton";
@@ -11,8 +11,7 @@ import MASCOT_ICON from "@/assets/image/main/mascot_icon.png";
 
 export default function Header() {
   const location = useLocation();
-  const { userInfo } = useUserStore();
-  const isAuthenticated = !!userInfo?.id;
+  const { isLogin } = useLoginCheck();
 
   const [isShowBackButton, setIsShowBackButton] = useState(false);
   const [isShowHomeButton, setIsShowHomeButton] = useState(false);
@@ -21,10 +20,10 @@ export default function Header() {
 
   useEffect(() => {
     const isLoginPage = location.pathname === "/member-login";
-    const isMainPage = location.pathname === "/main" && isAuthenticated;
+    const isMainPage = location.pathname === "/main" && isLogin;
     const isAnswerIntro = location.pathname === "/answer";
     const isCreatedCompletePage =
-      (location.pathname === "/question-create-complete" && isAuthenticated) ||
+      (location.pathname === "/question-create-complete" && isLogin) ||
       location.pathname === "/answer-create-complete";
     const isQuestionRoute = location.pathname.startsWith("/question");
 
@@ -33,7 +32,7 @@ export default function Header() {
 
     setIsShowSettingButton(isMainPage || isQuestionRoute);
     setIsShowOnlyLogout(isQuestionRoute);
-  }, [location, isAuthenticated]);
+  }, [location, isLogin]);
 
   return (
     <header className="flex items-center justify-between pt-4">
