@@ -1,18 +1,19 @@
-import { FaTrashAlt } from "react-icons/fa";
-import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
-
-import { Button } from "../../ui/button";
 import { useState } from "react";
-import AnswerDeleteDialog from "./AnswerDeleteDialog";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { Answer } from "@/types/answer";
+
+import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
+import { Button } from "../../ui/button";
+import { Bead } from "@/components/bead/Bead";
+import AnswerDeleteDialog from "./AnswerDeleteDialog";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   data: Answer;
   onDeleteSuccess: () => void;
-  isGuestAccess: boolean;
+  isGuestAccess?: boolean;
 };
 
 export default function AnswerDetailDialog({
@@ -20,7 +21,7 @@ export default function AnswerDetailDialog({
   onClose,
   data,
   onDeleteSuccess,
-  isGuestAccess,
+  isGuestAccess = false,
 }: Props) {
   const [isDeleteAlertOpen, setIsDeleteDialogOpen] = useState(false);
   const date = data.regDate as string;
