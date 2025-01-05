@@ -82,7 +82,7 @@ export function Answer() {
             isOpen={selectedType === "START"}
             onClose={() => setSelectedType(null)}
             onBack={() => {
-              setSelectedType("DESC");
+              setSelectedType(null);
             }}
             onClick={() => {
               history.push("/member-login");
