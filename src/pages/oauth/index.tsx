@@ -52,7 +52,7 @@ export default function OAuth() {
                   localStorage.getItem("redirectPath") || "/main";
                 history.push(redirectPath);
               } else {
-                // Case1: 토큰 API O & 유저 정보 API X3
+                // Case1: 토큰 API O & 유저 정보 API X
                 throw new Error("Fail to get user information");
               }
             });
