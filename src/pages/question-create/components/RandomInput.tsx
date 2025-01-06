@@ -10,8 +10,6 @@ interface RandomInputProps {
 }
 
 export default function RandomInput({ value, onChange }: RandomInputProps) {
-  const randomQuestion = MOCK_QUESTION_LIST[getRandomIndex(MOCK_QUESTION_LIST)];
-
   const handleChangeInput = (value: string) => {
     onChange(value);
   };
@@ -27,7 +25,12 @@ export default function RandomInput({ value, onChange }: RandomInputProps) {
         />
         <Button
           className="h-10 w-12"
-          onClick={() => handleChangeInput(randomQuestion)}
+          onClick={() => {
+            // todo: 랜덤 질문 내용 수정
+            const randomQuestion =
+              MOCK_QUESTION_LIST[getRandomIndex(MOCK_QUESTION_LIST)];
+            handleChangeInput(randomQuestion);
+          }}
         >
           <IoReload />
         </Button>
