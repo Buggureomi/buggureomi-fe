@@ -33,7 +33,7 @@ export default function WithoutAnswer({
             기다려 볼까요?
           </span>
           <span className="text-white font-nanum-dahaengce mb-2">
-            다시 한번 공유해볼까요?
+            다시 한 번 공유해 볼까요?
           </span>
         </div>
       </div>
