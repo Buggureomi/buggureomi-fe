@@ -35,8 +35,6 @@ const refreshAccessToken = async () => {
       const refreshToken = tokenCookie.getCookie("refreshToken");
 
       if (!refreshToken) {
-        localStorage.removeItem("user-storage");
-        localStorage.removeItem("snow-storage");
         throw new Error("There is no refresh token");
       }
 
@@ -86,6 +84,7 @@ const createAxiosInstance = (withToken: boolean = false): AxiosInstance => {
             tokenCookie.deleteCookie("refreshToken");
             localStorage.removeItem("user-storage");
             localStorage.removeItem("snow-storage");
+            window.location.href = "/member-login";
           }
         }
         return config;
