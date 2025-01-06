@@ -37,6 +37,11 @@ export function Answer() {
     }
   };
 
+  const handleLogin = () => {
+    localStorage.setItem("redirectPath", `/answer-create?question=${sqidsId}`);
+    history.push("/member-login");
+  };
+
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col my-auto">
@@ -84,9 +89,7 @@ export function Answer() {
             onBack={() => {
               setSelectedType(null);
             }}
-            onClick={() => {
-              history.push("/member-login");
-            }}
+            onClick={handleLogin}
           />
         )}
     </div>
