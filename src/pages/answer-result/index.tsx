@@ -17,7 +17,7 @@ export default function AnswerResult() {
   const { userInfo } = useUserStore();
 
   const query = useQuery();
-  const sqidsId = query.get("question") as string;
+  const sqidsId = query.get("question");
   const [nickname, setNickname] = useState<string>("");
 
   const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false);
