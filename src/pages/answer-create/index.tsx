@@ -107,6 +107,7 @@ export default function AnswerCreate() {
           <TextFieldWrapper
             title="보내는 사람"
             value={senderName}
+            maxLength={10}
             onChange={setSenderName}
             placeholder="이름 입력"
           />
