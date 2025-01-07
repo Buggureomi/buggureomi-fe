@@ -60,10 +60,10 @@ export default function AnswerCreate() {
     <section className="flex flex-col h-full gap-6 justify-between">
       <div className="flex flex-col my-auto gap-4">
         <div className="flex flex-col items-center gap-2">
-          <p className="text-center text-white text-lg">
+          <p className="text-center text-[#CFD2E4] text-lg">
             {questionInfo.nickname}님이 답변을 기다려요!
           </p>
-          <span className="text-[#CFD2E4] text-2xl font-bold text-center">
+          <span className="text-[#FFFFFF] text-[22px] font-semibold text-center">
             {questionInfo.content}
           </span>
         </div>
@@ -81,8 +81,7 @@ export default function AnswerCreate() {
               ))}
             </div>
           ))}
-
-          <p className="text-center text-white text-xl font-nanum-dahaengce">
+          <p className="text-center text-[#D9D9D9] text-xl font-nanum-dahaengce font-extralight">
             어떤 색상의 구슬로
             <br />
             답변을 할까요?
