@@ -4,7 +4,7 @@ import { MainPageInfo } from "@/types/main-page";
 import { Button } from "@/components/ui/button";
 import { ReflectionButton } from "./ReflectionButton";
 import ShareButton from "@/components/share/ShareButton";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import NicknameDisplay from "./NicknameDisplay";
 
 type Props = {
@@ -42,9 +42,12 @@ export default function WithAnswer({
           <h3 className="font-bold mb-2 w-full text-left text-white">
             담긴 쪽지 미리보기
           </h3>
-          <p className="bg-[#F3F3F3] w-full px-4 py-3 rounded-md mb-4 h-24 overflow-y-auto font-nanum-dahaengce">
+          <Link
+            to={"/answer-result"}
+            className="block bg-[#F3F3F3] w-full px-4 py-3 rounded-md mb-4 h-24 overflow-y-auto font-nanum-dahaengce"
+          >
             {previewMessage}
-          </p>
+          </Link>
         </div>
       </div>
 
