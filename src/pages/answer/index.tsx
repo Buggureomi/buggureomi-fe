@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnswerDescButtonSheet } from "./answer-desc-botton-sheet/AnswerDescBottonSheet";
 import { AnswerStartButton } from "./answer-start-botton-sheet/AnswerStartBottonSheet";
 import { useUserStore } from "@/store/userStore";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import pouch_with_mascot from "@/shared/assets/pouch/pouch_with_mascot.svg";
 import { useQuestionInfo } from "@/hooks/useQuestionInfo";
 import { useQuery } from "@/hooks/useQuery";
+import MascotFaceLoading from "@/shared/components/MascotLoadingUI";
 
 export function Answer() {
   const query = useQuery();
@@ -17,6 +18,7 @@ export function Answer() {
   const [selectedType, setSelectedType] = useState<"DESC" | "START" | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { userInfo } = useUserStore();
 
@@ -41,6 +43,18 @@ export function Answer() {
     localStorage.setItem("redirectPath", `/answer-create?question=${sqidsId}`);
     history.push("/member-login");
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(!questionInfo);
+    }, 2000);
+
+    return () => clearTimeout(timer); // 타이머 정리
+  }, [questionInfo]);
+
+  if (isLoading) {
+    return <MascotFaceLoading />;
+  }
 
   return (
     <div className="flex flex-col h-full justify-between">
