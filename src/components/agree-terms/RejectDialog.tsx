@@ -31,9 +31,7 @@ export default function RejectDialog({ isOpen, onClose }: Props) {
       <AlertDialogContent>
         <AlertDialogHeader className="mt-3 mb-5">
           <AlertDialogTitle className="!text-h2">
-            <div>
-              <p>약관 동의를 거부하시겠습니까?</p>
-            </div>
+            <p>약관 동의를 거부하시겠습니까?</p>
           </AlertDialogTitle>
           <AlertDialogDescription>
             <span>거부하실 경우 서비스 이용에 제약이 있습니까?</span>

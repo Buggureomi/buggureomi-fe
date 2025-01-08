@@ -38,10 +38,10 @@ export default function AnswerDeleteDialog({
       <AlertDialogContent>
         <AlertDialogHeader className="mt-3 mb-5">
           <AlertDialogTitle className="!text-h2">
-            <div>
+            <p>
               깨진 구슬은 <strong>복구할 수 없어요!</strong>
-              <p>정말 구슬을 깨트릴까요?</p>
-            </div>
+            </p>
+            <p>정말 구슬을 깨트릴까요?</p>
           </AlertDialogTitle>
           <AlertDialogDescription>
             <span>신중하게 결정하세요!</span>
