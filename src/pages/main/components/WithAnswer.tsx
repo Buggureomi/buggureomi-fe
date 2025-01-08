@@ -48,13 +48,13 @@ export default function WithAnswer({
           >
             {previewMessage}
           </Link>
+          <p className="font-nanum-dahaengce mb-2 text-center text-white text-xl">
+            누구의 구슬일까요? 지금 열어보세요!
+          </p>
         </div>
       </div>
 
       <footer className="w-full pb-10">
-        <p className="font-nanum-dahaengce mb-2 text-center text-white text-xl">
-          누구의 구슬일까요? 지금 열어보세요!
-        </p>
         <Button
           className="mb-2 w-full"
           children="열어보기"
