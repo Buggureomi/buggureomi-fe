@@ -23,7 +23,7 @@ export default function AnswerCard({ answer, onDialogOpen }: Props) {
         onClick={onDialogOpen}
         className="rounded-md border-2 min-h-20 p-3 bg-[#F3F3F3] font-nanum-dahaengce text-xl whitespace-pre-wrap"
       >
-        <p>{answer.content}</p>
+        <p className="line-clamp-2 overflow-hidden">{answer.content}</p>
       </div>
     </div>
   );
