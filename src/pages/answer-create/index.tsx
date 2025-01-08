@@ -15,6 +15,7 @@ import { useQuery } from "@/hooks/useQuery";
 import { useQuestionInfo } from "@/hooks/useQuestionInfo";
 
 export default function AnswerCreate() {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const history = useHistory();
   const query = useQuery();
@@ -34,7 +35,10 @@ export default function AnswerCreate() {
   if (!questionInfo) return null;
 
   const sendAnswer = async () => {
+    if (isLoading) return;
+
     try {
+      setIsLoading(true);
       const { data } = await answerAPI.create({
         questionId: questionInfo.questionId,
         sender: senderName.trim(),
@@ -51,10 +55,13 @@ export default function AnswerCreate() {
         description: "구슬 생성에 실패했습니다.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const isNextButtonDisabled = !content.trim() || !senderName.trim();
+  const isNextButtonDisabled =
+    !content.trim() || !senderName.trim() || isLoading;
 
   return (
     <section className="flex flex-col h-full gap-6 justify-between">
