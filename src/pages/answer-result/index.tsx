@@ -125,7 +125,13 @@ export default function AnswerResult() {
         <h2 className="text-h2">
           {sqidsId ? nickname : userInfo?.nickname}님의 보따리
         </h2>
-        <h2 className="text-h2">{totalCount}개의 답변이 담겨 있어요!</h2>
+        <h2 className="text-h2">
+          {totalCount !== -1 ? (
+            <span>{totalCount}개의 답변이 담겨 있어요!</span>
+          ) : (
+            <span>마음이 담긴 구슬이 들어있어요!</span>
+          )}
+        </h2>
       </div>
 
       <div
