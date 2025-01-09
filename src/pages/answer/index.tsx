@@ -40,9 +40,14 @@ export function Answer() {
   };
 
   const handleLogin = () => {
-    localStorage.setItem("redirectPath", `/answer-create?question=${sqidsId}`);
+    localStorage.setItem("redirectPath", `/answer?question=${sqidsId}`);
     history.push("/member-login");
   };
+
+  // 로그인 후 접근했을 때 삭제
+  useEffect(() => {
+    if (userInfo?.id) localStorage.removeItem("redirectPath");
+  }, [userInfo?.id]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,7 +60,7 @@ export function Answer() {
   if (isLoading) {
     return <MascotFaceLoading />;
   }
-
+    
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col my-auto">
