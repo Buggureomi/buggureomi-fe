@@ -43,8 +43,8 @@ export default function MemberLogin() {
               <img src={mascot_front_standing} alt="부꾸 캐릭터" />
             </div>
 
-            <div className="text-center my-10 text-white font-nanum-dahaengce text-[23px]">
-              <p>여러분을 생각하는 사람들의 마음을</p>
+            <div className="text-center mt-6 mb-10 text-white font-nanum-dahaengce text-[23px]">
+              <p>전해 듣고 싶은 속마음이 있지 않나요?</p>
               <p>부꾸가 전달해줄게요!</p>
             </div>
           </div>
