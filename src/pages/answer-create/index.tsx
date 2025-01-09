@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { answerAPI } from "@/api/answer";
-
 import { Button } from "@/components/ui/button";
+import { LuLoaderCircle } from "react-icons/lu";
 
 import { COLOR_CODE_LIST } from "@/constant/color";
 
@@ -118,10 +118,14 @@ export default function AnswerCreate() {
           className="w-full"
           disabled={isNextButtonDisabled}
           children={
-            <div className="w-full flex flex-row items-center">
-              <span className="grow">완료</span>
-              <IoChevronForward className="shrink-0" />
-            </div>
+            isLoading ? (
+              <LuLoaderCircle className="animate-spin" />
+            ) : (
+              <div className="w-full flex flex-row items-center">
+                <span className="grow">완료</span>
+                <IoChevronForward className="shrink-0" />
+              </div>
+            )
           }
           onClick={sendAnswer}
         />
